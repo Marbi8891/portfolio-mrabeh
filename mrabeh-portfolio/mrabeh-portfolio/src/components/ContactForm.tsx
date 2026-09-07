@@ -33,26 +33,23 @@ export default function ContactForm() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    setStatus('sending')
 
-    // Formspree integration (replace YOUR_FORM_ID with actual id)
-    try {
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      })
-      if (response.ok) {
-        setStatus('success')
-        setFormData({ name: '', email: '', company: '', reason: '', message: '' })
-      } else {
-        setStatus('error')
-      }
-    } catch {
+    if (!formData.name || !formData.email || !formData.reason || !formData.message) {
       setStatus('error')
+      return
     }
+
+    // TODO: switch to a Formspree endpoint (or similar) once a real form ID exists.
+    // Until then, submitting opens the visitor's email client with the message
+    // pre-filled, so the form is always functional rather than silently failing.
+    const subject = encodeURIComponent(`[Portfolio] ${formData.reason} — ${formData.name}`)
+    const body = encodeURIComponent(
+      `Nombre: ${formData.name}\nEmail: ${formData.email}\nEmpresa: ${formData.company || '—'}\nMotivo: ${formData.reason}\n\n${formData.message}`
+    )
+    window.location.href = `mailto:mrabehfathiprofesional@gmail.com?subject=${subject}&body=${body}`
+    setStatus('success')
   }
 
   const inputClass =
@@ -147,13 +144,13 @@ export default function ContactForm() {
       {status === 'success' && (
         <div className="flex items-center gap-3 p-4 rounded-lg bg-accent-green/10 border border-accent-green/20 text-accent-green text-sm">
           <CheckCircle size={16} />
-          Mensaje enviado correctamente. Me pondré en contacto contigo pronto.
+          Se ha abierto tu cliente de correo con el mensaje listo para enviar. Si no se abre, escríbeme directamente a mrabehfathiprofesional@gmail.com.
         </div>
       )}
       {status === 'error' && (
         <div className="flex items-center gap-3 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
           <AlertCircle size={16} />
-          Error al enviar. Escríbeme directamente a mrabehfathiprofesional@gmail.com
+          Completa los campos obligatorios (*), o escríbeme directamente a mrabehfathiprofesional@gmail.com
         </div>
       )}
 
