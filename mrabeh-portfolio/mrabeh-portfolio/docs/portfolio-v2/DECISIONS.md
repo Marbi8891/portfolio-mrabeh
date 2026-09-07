@@ -25,3 +25,10 @@
 - Decisión: se genera el PDF a partir de datos verificados (memoria del usuario + contenido ya corregido del repo), no a partir de un archivo que el usuario suba.
 - Fuente de verdad para fechas de experiencia: informe de vida laboral (jul 2026) — OSSA/Trojena 05/01/2025–05/03/2025; Construcciones Sánchez Domínguez Sando 17/10/2023–15/12/2023; Ayuntamiento de Leganés 30/04/2021–29/10/2021; Agencia Local de Empleo 15/12/2017–14/06/2018. Estas fechas corrigen las que había en `CV.tsx`/`experience.ts`, que no coincidían.
 - `VERIFY` pendiente del usuario: revisar el PDF generado antes de publicarlo/enviarlo a ninguna empresa.
+
+## ADR-005 — Vulnerabilidades de dependencias (npm audit)
+- Estado: DECIDIDO (2026-09-07), revisión pre-push
+- `npm audit` encontró 12 vulnerabilidades (2 low, 4 moderate, 6 high). `npm audit fix` (no rompe compatibilidad) resolvió 8 de las 12.
+- Las 4 restantes (3 moderate, 1 high) requieren saltos de versión mayor: `vite` 5→8 y `react-router-dom` 6→7.
+- Decisión: NO forzar (`npm audit fix --force`) a 9 días del deadline. Razones: (1) `esbuild`/`vite` — la vulnerabilidad ("cualquier web puede leer respuestas del dev server") solo afecta al entorno de desarrollo local, no a la build estática de producción servida por Cloudflare Pages; (2) `react-router` — "open redirect" requiere un vector de redirección controlado por el usuario que este sitio no tiene (rutas estáticas, sin params de redirect); (3) saltar dos versiones mayores de React Router 9 días antes de una fecha límite, sin ventana para testear cada página, es más riesgoso que las vulnerabilidades que mitiga.
+- `VERIFY` pendiente: revisar el upgrade a Vite 8 / React Router 7 después del 16 de septiembre, con tiempo para probar cada ruta.
