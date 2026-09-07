@@ -26,7 +26,7 @@ export default function Projects() {
           label="portfolio"
           title="Proyectos"
           highlight="reales"
-          description="Plataformas SaaS, frameworks de seguridad, herramientas de análisis y aplicaciones web construidas en producción."
+          description="Proyectos propios en distintas fases: diseño, construcción y aprendizaje. Cada tarjeta indica su estado real."
         />
 
         {/* Filters */}

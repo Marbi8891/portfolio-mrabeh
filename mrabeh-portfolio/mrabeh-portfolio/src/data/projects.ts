@@ -19,17 +19,19 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'nexaro-ai',
-    title: 'NEXARO AI',
-    subtitle: 'Plataforma SaaS de Ciberseguridad B2B',
-    description: 'Plataforma de diagnóstico de seguridad web, scoring de riesgos, generación de informes automatizados y captación de leads B2B.',
-    longDescription: 'NEXARO AI es una plataforma SaaS orientada a empresas que necesitan un diagnóstico rápido y fiable de su postura de seguridad web. Incluye análisis de vulnerabilidades, scoring de riesgos basado en OWASP, generación de informes en PDF, alertas automáticas y un panel de control multi-tenant para gestionar múltiples activos.',
-    tags: ['FastAPI', 'React', 'PostgreSQL', 'Docker', 'OWASP', 'Python', 'Stripe', 'Redis'],
+    title: 'NEXARO',
+    subtitle: 'Vulnerability Intelligence & Risk Decision — en diseño',
+    description: 'NEXARO convierte hallazgos de seguridad (de escáneres que la empresa ya usa) en prioridades de remediación explicables: normaliza, deduplica, enriquece cada CVE con inteligencia de vulnerabilidades (ARGOS) y combina eso con exposición de activos y contexto de negocio.',
+    longDescription: 'NEXARO no escanea: ingiere resultados de herramientas de seguridad ya existentes, los normaliza y deduplica, enriquece las CVEs subyacentes con ARGOS (modelo de riesgo propio) y las combina con exposición de activos, contexto de negocio y controles existentes para responder una pregunta: qué arreglar primero, y por qué. El diseño técnico completo (arquitectura, modelo de dominio, modelo de datos, modelo de riesgo ARGOS-RISK-V1, motor de decisión, API, seguridad, multi-tenancy, escalabilidad, pipeline de imports, UX y 10 Architecture Decision Records) está terminado. La implementación de código está en curso; todavía no hay una versión desplegada.',
+    tags: ['FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'Python', 'React', 'ARGOS', 'CVSS/EPSS/KEV'],
     category: 'cybersecurity',
-    status: 'active',
+    status: 'development',
     featured: true,
     icon: 'Shield',
     color: '#00d4ff',
-    links: {},
+    links: {
+      github: 'https://github.com/Marbi8891/portfolio-mrabeh/tree/nexaro/v1-design-package/nexaro',
+    },
   },
   {
     id: 'claw-framework',
