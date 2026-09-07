@@ -11,12 +11,12 @@ export default function AvisoLegal() {
             <p>Titular: Mrabeh Fathi Boussayff</p>
             <p>Domicilio: Madrid / Leganés, España</p>
             <p>Email: mrabehfathiprofesional@gmail.com</p>
-            <p>Web: mrabehfathi.com</p>
+            <p>Web: mrabehfathi.es</p>
           </section>
 
           <section>
             <h2 className="font-display font-bold text-xl text-text mb-3">2. Objeto</h2>
-            <p>El presente aviso legal regula el uso del sitio web mrabehfathi.com, del que es titular Mrabeh Fathi Boussayff. La navegación por el sitio web del titular implica la aceptación expresa y plena de los términos y condiciones recogidos en este aviso legal.</p>
+            <p>El presente aviso legal regula el uso del sitio web mrabehfathi.es, del que es titular Mrabeh Fathi Boussayff. La navegación por el sitio web del titular implica la aceptación expresa y plena de los términos y condiciones recogidos en este aviso legal.</p>
           </section>
 
           <section>

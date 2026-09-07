@@ -115,7 +115,7 @@ export default function Footer() {
             © {new Date().getFullYear()} Mrabeh Fathi Boussayff · Todos los derechos reservados
           </p>
           <p className="text-xs text-text-muted">
-            mrabehfathi.com · Madrid, España
+            mrabehfathi.es · Madrid, España
           </p>
         </div>
       </div>

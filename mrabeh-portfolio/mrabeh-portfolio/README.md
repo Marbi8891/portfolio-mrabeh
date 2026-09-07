@@ -3,7 +3,7 @@
 > Portfolio profesional · React + Vite + TypeScript + Tailwind CSS  
 > Desplegado **gratuitamente** en Cloudflare Pages · CDN global · SSL automático
 
-**Dominio:** [mrabehfathi.com](https://mrabehfathi.com)
+**Dominio:** [mrabehfathi.es](https://mrabehfathi.es)
 
 ---
 
@@ -13,7 +13,7 @@
 2. [Estructura del proyecto](#estructura-del-proyecto)
 3. [Desarrollo local](#desarrollo-local)
 4. [Despliegue gratuito en Cloudflare Pages](#despliegue-gratuito-en-cloudflare-pages)
-5. [Conectar dominio mrabehfathi.com](#conectar-dominio-mrabehfathicom)
+5. [Conectar dominio mrabehfathi.es](#conectar-dominio-mrabehfathicom)
 6. [Variables de entorno en Cloudflare](#variables-de-entorno-en-cloudflare)
 7. [Formulario de contacto (Formspree)](#formulario-de-contacto-formspree)
 8. [SEO y rendimiento](#seo-y-rendimiento)
@@ -180,19 +180,19 @@ A partir de ahora, **cada `git push` a `main` redespliega automáticamente**.
 
 ---
 
-## Conectar dominio mrabehfathi.com
+## Conectar dominio mrabehfathi.es
 
 ### Paso 1 — Añadir el dominio raíz
 
 1. En Cloudflare Pages → tu proyecto → pestaña **Custom domains**
 2. Clic en **Set up a custom domain**
-3. Escribir: `mrabehfathi.com`
+3. Escribir: `mrabehfathi.es`
 4. Clic en **Continue** → **Activate domain**
 
-### Paso 2 — Añadir www.mrabehfathi.com
+### Paso 2 — Añadir www.mrabehfathi.es
 
 1. Repetir el proceso anterior
-2. Esta vez escribir: `www.mrabehfathi.com`
+2. Esta vez escribir: `www.mrabehfathi.es`
 3. Cloudflare gestiona automáticamente la redirección entre raíz y www
 
 ### Paso 3 — Configurar DNS en Hostinger
@@ -204,7 +204,7 @@ Si el dominio está en Hostinger:
 
 **Opción A — Transferir nameservers a Cloudflare (recomendado):**
 
-En Cloudflare → **Add a site** → introducir `mrabehfathi.com` → plan Free.
+En Cloudflare → **Add a site** → introducir `mrabehfathi.es` → plan Free.
 Cloudflare dará dos nameservers (ej: `ada.ns.cloudflare.com`).
 En Hostinger → cambiar los nameservers por los de Cloudflare.
 Ventaja: propagación instantánea, mayor control, protección DDoS.
@@ -288,7 +288,7 @@ Y añadir `VITE_FORMSPREE_ID` en Cloudflare → Settings → Environment variabl
 ```
 User-agent: *
 Allow: /
-Sitemap: https://mrabehfathi.com/sitemap.xml
+Sitemap: https://mrabehfathi.es/sitemap.xml
 ```
 
 **`public/sitemap.xml`:**
@@ -296,24 +296,24 @@ Sitemap: https://mrabehfathi.com/sitemap.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mrabehfathi.com/</loc>
+    <loc>https://mrabehfathi.es/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mrabehfathi.com/sobre-mi</loc>
+    <loc>https://mrabehfathi.es/sobre-mi</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mrabehfathi.com/proyectos</loc>
+    <loc>https://mrabehfathi.es/proyectos</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mrabehfathi.com/servicios</loc>
+    <loc>https://mrabehfathi.es/servicios</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mrabehfathi.com/contacto</loc>
+    <loc>https://mrabehfathi.es/contacto</loc>
     <priority>0.7</priority>
   </url>
 </urlset>

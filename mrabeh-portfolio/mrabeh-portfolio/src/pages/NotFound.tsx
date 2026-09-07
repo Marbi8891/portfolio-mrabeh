@@ -14,7 +14,7 @@ export default function NotFound() {
           </div>
           <p className="font-mono text-sm text-text-dim">
             <span className="text-accent">$ </span>
-            curl https://mrabehfathi.com<span className="text-red-400">/esta-ruta</span>
+            curl https://mrabehfathi.es<span className="text-red-400">/esta-ruta</span>
           </p>
           <p className="font-mono text-sm text-red-400 mt-2">Error: 404 Not Found</p>
           <p className="font-mono text-sm text-text-muted mt-1">Ruta no encontrada en el servidor.</p>
