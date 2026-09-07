@@ -14,7 +14,8 @@ Deadline: 16 septiembre 2026 (Digital Talent Day). Rama: `feat/portfolio-v2`. Si
 - CV: PDF generado desde datos verificados; fechas de CV.tsx corregidas; 3 enlaces rotos al PDF ahora funcionan.
 - SEO: metadata/OG/Twitter actualizados, JSON-LD Person añadido, imagen OG generada.
 - Calidad: `.eslintrc.cjs` añadido (no existía, `npm run lint` fallaba). `tsc --noEmit` limpio, `npm run lint` limpio (0 warnings), `npm run build` correcto, smoke test headless en las 6 rutas sin errores de página/consola (solo bloqueos de red esperables del sandbox hacia Google Fonts).
-- 8 commits pequeños y semánticos en `feat/portfolio-v2`.
+- 9 commits pequeños y semánticos en `feat/portfolio-v2`.
+- Revisión independiente (subagente sin contexto previo) encontró 3 problemas reales que se corrigieron en un 10º commit: NEXARO seguía etiquetado como "SaaS Cybersecurity" activo en `CV.tsx` (Proyectos destacados), una respuesta de FAQ en `Services.tsx` sonaba a especialización en seguridad no respaldada por el nivel autoevaluado, y el README documentaba un flujo de Formspree que ya no existe tras el cambio a mailto.
 
 ## Pendiente / no tocado
 - Los 6 proyectos marcados como no verificables en la auditoría (CLAW Framework, Golytics, Netseer, SYNAPSE/INTEL-LINK, SIGMA43, Calculadora Financiera Pro) — sin cambios, por instrucción explícita tuya (ver `DECISIONS.md` ADR-003). El hallazgo crítico de credibilidad sigue abierto si en algún momento quieres revisarlo.
