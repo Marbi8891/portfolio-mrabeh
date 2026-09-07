@@ -48,20 +48,20 @@ export default function CV() {
               </h3>
               <div className="space-y-3 text-sm text-text-dim">
                 <div>
-                  <p className="text-text font-medium">Trabajo Internacional</p>
-                  <p className="text-xs text-text-muted">Arabia Saudí · 2025</p>
+                  <p className="text-text font-medium">Proyecto NEOM–Trojena (OSSA), Arabia Saudí</p>
+                  <p className="text-xs text-text-muted">Apoyo administrativo · Ene–Mar 2025</p>
                 </div>
                 <div>
-                  <p className="text-text font-medium">Agencia de Empleo de Madrid</p>
-                  <p className="text-xs text-text-muted">Gestión administrativa · 2020–2024</p>
+                  <p className="text-text font-medium">Construcciones Sánchez Domínguez Sando</p>
+                  <p className="text-xs text-text-muted">Apoyo administrativo · Oct–Dic 2023</p>
                 </div>
                 <div>
                   <p className="text-text font-medium">Ayuntamiento de Leganés</p>
-                  <p className="text-xs text-text-muted">Administración pública · 2020–2022</p>
+                  <p className="text-xs text-text-muted">Gestión administrativa · Abr–Oct 2021</p>
                 </div>
                 <div>
-                  <p className="text-text font-medium">Fundación COCEMFE · SANDO</p>
-                  <p className="text-xs text-text-muted">Sector privado · 2018–2021</p>
+                  <p className="text-text font-medium">Agencia Local de Empleo</p>
+                  <p className="text-xs text-text-muted">Gestión administrativa · Dic 2017–Jun 2018</p>
                 </div>
               </div>
             </div>
@@ -73,18 +73,14 @@ export default function CV() {
               <div className="space-y-3 text-sm text-text-dim">
                 <div>
                   <p className="text-text font-medium">DAW + DAM</p>
-                  <p className="text-xs text-text-muted">FP Superior · 2023–2028</p>
+                  <p className="text-xs text-text-muted">FP Aspasia, Leganés · En curso</p>
                 </div>
                 <div>
-                  <p className="text-text font-medium">eJPT (en progreso)</p>
-                  <p className="text-xs text-text-muted">eLearnSecurity / INE · 2025</p>
+                  <p className="text-text font-medium">eJPT — Junior Penetration Tester</p>
+                  <p className="text-xs text-text-muted">eLearnSecurity / INE · En progreso</p>
                 </div>
                 <div>
-                  <p className="text-text font-medium">Ciberseguridad y GRC</p>
-                  <p className="text-xs text-text-muted">Formación práctica continua</p>
-                </div>
-                <div>
-                  <p className="text-text font-medium">Python PCAP</p>
+                  <p className="text-text font-medium">PCAP — Python Certified Associate</p>
                   <p className="text-xs text-text-muted">Python Institute · En progreso</p>
                 </div>
               </div>
