@@ -7,6 +7,7 @@ import {
 } from 'lucide-react'
 import SectionTitle from '@/components/SectionTitle'
 import ProjectCard from '@/components/ProjectCard'
+import Seo from '@/components/Seo'
 import { projects } from '@/data/projects'
 import { techStack } from '@/data/skills'
 
@@ -109,6 +110,11 @@ export default function Home() {
 
   return (
     <>
+      <Seo
+        title="Mrabeh Fathi · Desarrollador Web en formación · Ciberseguridad"
+        description="Desarrollador web en formación (DAW/DAM), preparando ciberseguridad (eJPT) y construyendo NEXARO. Madrid, España."
+        path="/"
+      />
       {/* ─── HERO ─── */}
       <section
         ref={heroRef}

@@ -1,8 +1,14 @@
 import { Download, FileText, ExternalLink } from 'lucide-react'
+import Seo from '@/components/Seo'
 
 export default function CV() {
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title="CV"
+        description="Currículum de Mrabeh Fathi Boussayff: experiencia, formación DAW/DAM y certificaciones en progreso (eJPT, PCAP)."
+        path="/cv"
+      />
       <div className="section-container max-w-4xl">
         <div className="text-center mb-12">
           <p className="font-mono text-accent text-sm mb-3 tracking-widest">// curriculum vitae</p>
