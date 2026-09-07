@@ -1,4 +1,4 @@
-import { ArrowUpRight, Shield, Terminal, BarChart3, Network, Brain, Lock, Calculator, type LucideProps } from 'lucide-react'
+import { ArrowUpRight, Github, ExternalLink, Shield, Terminal, BarChart3, Network, Brain, Lock, Calculator, type LucideProps } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Project } from '@/data/projects'
 import type { ForwardRefExoticComponent, RefAttributes } from 'react'
@@ -103,14 +103,38 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         >
           ● {statusLabel[project.status]}
         </span>
-        <Link
-          to={`/proyectos`}
-          className="flex items-center gap-1 text-sm text-text-dim hover:text-accent transition-colors group/link"
-          style={{ color: project.color }}
-        >
-          <span className="text-xs font-mono">ver_más</span>
-          <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-        </Link>
+        <div className="flex items-center gap-3">
+          {project.links?.github && (
+            <a
+              href={project.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Repositorio de ${project.title} en GitHub`}
+              className="text-text-dim hover:text-accent transition-colors"
+            >
+              <Github size={16} />
+            </a>
+          )}
+          {project.links?.demo && (
+            <a
+              href={project.links.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Demo de ${project.title}`}
+              className="text-text-dim hover:text-accent transition-colors"
+            >
+              <ExternalLink size={16} />
+            </a>
+          )}
+          <Link
+            to={`/proyectos`}
+            className="flex items-center gap-1 text-sm text-text-dim hover:text-accent transition-colors group/link"
+            style={{ color: project.color }}
+          >
+            <span className="text-xs font-mono">ver_más</span>
+            <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+          </Link>
+        </div>
       </div>
     </div>
   )

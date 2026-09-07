@@ -20,7 +20,7 @@ export const projects: Project[] = [
   {
     id: 'nexaro-ai',
     title: 'NEXARO',
-    subtitle: 'Vulnerability Intelligence & Risk Decision — en diseño',
+    subtitle: 'Vulnerability Intelligence & Risk Decision',
     description: 'NEXARO convierte hallazgos de seguridad (de escáneres que la empresa ya usa) en prioridades de remediación explicables: normaliza, deduplica, enriquece cada CVE con inteligencia de vulnerabilidades (ARGOS) y combina eso con exposición de activos y contexto de negocio.',
     longDescription: 'NEXARO no escanea: ingiere resultados de herramientas de seguridad ya existentes, los normaliza y deduplica, enriquece las CVEs subyacentes con ARGOS (modelo de riesgo propio) y las combina con exposición de activos, contexto de negocio y controles existentes para responder una pregunta: qué arreglar primero, y por qué. El diseño técnico completo (arquitectura, modelo de dominio, modelo de datos, modelo de riesgo ARGOS-RISK-V1, motor de decisión, API, seguridad, multi-tenancy, escalabilidad, pipeline de imports, UX y 10 Architecture Decision Records) está terminado. La implementación de código está en curso; todavía no hay una versión desplegada.',
     tags: ['FastAPI', 'PostgreSQL', 'Redis', 'Docker', 'Python', 'React', 'ARGOS', 'CVSS/EPSS/KEV'],

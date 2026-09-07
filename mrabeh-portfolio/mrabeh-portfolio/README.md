@@ -31,7 +31,6 @@
 | Estilos | Tailwind CSS v3 |
 | Routing | React Router v6 |
 | Iconos | Lucide React |
-| Animaciones | Framer Motion |
 | Hosting | **Cloudflare Pages** (gratis) |
 | CDN | Cloudflare Global Network (300+ PoPs) |
 | SSL | Automático (Let's Encrypt via Cloudflare) |
