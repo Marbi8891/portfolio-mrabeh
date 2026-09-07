@@ -4,6 +4,8 @@ interface SectionTitleProps {
   highlight?: string
   description?: string
   centered?: boolean
+  /** Semantic heading level. Each page should have exactly one h1. Defaults to h2. */
+  as?: 'h1' | 'h2'
 }
 
 export default function SectionTitle({
@@ -12,7 +14,9 @@ export default function SectionTitle({
   highlight,
   description,
   centered = false,
+  as = 'h2',
 }: SectionTitleProps) {
+  const Heading = as
   return (
     <div className={`mb-12 ${centered ? 'text-center' : ''}`}>
       {label && (
@@ -20,7 +24,7 @@ export default function SectionTitle({
           // {label}
         </p>
       )}
-      <h2 className="font-display font-bold text-3xl sm:text-4xl text-text mb-4">
+      <Heading className="font-display font-bold text-3xl sm:text-4xl text-text mb-4">
         {title}
         {highlight && (
           <>
@@ -28,7 +32,7 @@ export default function SectionTitle({
             <span className="gradient-text">{highlight}</span>
           </>
         )}
-      </h2>
+      </Heading>
       {description && (
         <p className={`text-text-dim leading-relaxed text-lg ${centered ? 'max-w-2xl mx-auto' : 'max-w-2xl'}`}>
           {description}

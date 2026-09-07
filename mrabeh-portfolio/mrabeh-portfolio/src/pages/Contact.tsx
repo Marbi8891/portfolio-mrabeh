@@ -1,12 +1,19 @@
 import { Mail, Linkedin, MapPin, Clock } from 'lucide-react'
 import SectionTitle from '@/components/SectionTitle'
 import ContactForm from '@/components/ContactForm'
+import Seo from '@/components/Seo'
 
 export default function Contact() {
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title="Contacto"
+        description="Contacta con Mrabeh Fathi para roles tech, colaboraciones o proyectos freelance."
+        path="/contacto"
+      />
       <div className="section-container">
         <SectionTitle
+          as="h1"
           label="contacto"
           title="Hablemos"
           highlight="en serio"

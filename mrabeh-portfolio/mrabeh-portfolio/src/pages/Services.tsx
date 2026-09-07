@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Code2, Shield, Zap, Monitor, BarChart2, FileText, ArrowRight, type LucideProps } from 'lucide-react'
 import SectionTitle from '@/components/SectionTitle'
+import Seo from '@/components/Seo'
 import { services } from '@/data/experience'
 import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 
@@ -32,8 +33,14 @@ const faq = [
 export default function Services() {
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title="Servicios"
+        description="Desarrollo web, primera revisión de seguridad básica y automatización de procesos para pequeñas empresas."
+        path="/servicios"
+      />
       <div className="section-container">
         <SectionTitle
+          as="h1"
           label="servicios"
           title="Cómo puedo"
           highlight="ayudarte"

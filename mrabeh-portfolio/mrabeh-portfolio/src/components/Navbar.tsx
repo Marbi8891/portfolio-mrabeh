@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, Shield } from 'lucide-react'
+import { Menu, X, Shield, Github } from 'lucide-react'
 
 const navLinks = [
   { href: '/', label: 'Inicio' },
@@ -65,6 +65,15 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
+            <a
+              href="https://github.com/Marbi8891"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="p-2 rounded-lg text-text-dim hover:text-text hover:bg-surface transition-colors"
+            >
+              <Github size={18} />
+            </a>
             <Link to="/cv" className="btn-outline text-sm py-2 px-4">
               Ver CV
             </Link>
@@ -74,7 +83,9 @@ export default function Navbar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-lg text-text-dim hover:text-text hover:bg-surface transition-colors"
-            aria-label="Toggle menu"
+            aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-expanded={isOpen}
+            aria-controls="mobile-nav"
           >
             {isOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
@@ -82,7 +93,10 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      <div
+      <nav
+        id="mobile-nav"
+        aria-label="Navegación móvil"
+        aria-hidden={!isOpen}
         className={`md:hidden transition-all duration-300 overflow-hidden ${
           isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
@@ -105,7 +119,7 @@ export default function Navbar() {
             Ver CV
           </Link>
         </div>
-      </div>
+      </nav>
     </header>
   )
 }

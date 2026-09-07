@@ -25,7 +25,7 @@ export default function ContactForm() {
     reason: '',
     message: '',
   })
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -33,7 +33,7 @@ export default function ContactForm() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (!formData.name || !formData.email || !formData.reason || !formData.message) {
@@ -53,36 +53,41 @@ export default function ContactForm() {
   }
 
   const inputClass =
-    'w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text placeholder-text-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all duration-200 font-mono'
+    'w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text placeholder-text-muted focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 transition-all duration-200 font-mono'
+  const labelClass = 'block text-xs font-mono text-text-muted mb-2 uppercase tracking-wider'
 
   return (
-    <div className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit} noValidate>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-mono text-text-muted mb-2 uppercase tracking-wider">
+          <label htmlFor="cf-name" className={labelClass}>
             Nombre *
           </label>
           <input
+            id="cf-name"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             placeholder="Tu nombre completo"
             className={inputClass}
+            aria-required="true"
             required
           />
         </div>
         <div>
-          <label className="block text-xs font-mono text-text-muted mb-2 uppercase tracking-wider">
+          <label htmlFor="cf-email" className={labelClass}>
             Email *
           </label>
           <input
+            id="cf-email"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             placeholder="tu@empresa.com"
             className={inputClass}
+            aria-required="true"
             required
           />
         </div>
@@ -90,10 +95,11 @@ export default function ContactForm() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label className="block text-xs font-mono text-text-muted mb-2 uppercase tracking-wider">
+          <label htmlFor="cf-company" className={labelClass}>
             Empresa
           </label>
           <input
+            id="cf-company"
             type="text"
             name="company"
             value={formData.company}
@@ -103,14 +109,16 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="block text-xs font-mono text-text-muted mb-2 uppercase tracking-wider">
+          <label htmlFor="cf-reason" className={labelClass}>
             Motivo *
           </label>
           <select
+            id="cf-reason"
             name="reason"
             value={formData.reason}
             onChange={handleChange}
             className={inputClass}
+            aria-required="true"
             required
           >
             <option value="" disabled>
@@ -126,50 +134,41 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block text-xs font-mono text-text-muted mb-2 uppercase tracking-wider">
+        <label htmlFor="cf-message" className={labelClass}>
           Mensaje *
         </label>
         <textarea
+          id="cf-message"
           name="message"
           value={formData.message}
           onChange={handleChange}
           placeholder="Cuéntame en qué puedo ayudarte..."
           rows={5}
           className={inputClass}
+          aria-required="true"
           required
         />
       </div>
 
       {/* Status messages */}
-      {status === 'success' && (
-        <div className="flex items-center gap-3 p-4 rounded-lg bg-accent-green/10 border border-accent-green/20 text-accent-green text-sm">
-          <CheckCircle size={16} />
-          Se ha abierto tu cliente de correo con el mensaje listo para enviar. Si no se abre, escríbeme directamente a mrabehfathiprofesional@gmail.com.
-        </div>
-      )}
-      {status === 'error' && (
-        <div className="flex items-center gap-3 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-          <AlertCircle size={16} />
-          Completa los campos obligatorios (*), o escríbeme directamente a mrabehfathiprofesional@gmail.com
-        </div>
-      )}
-
-      <button
-        onClick={handleSubmit}
-        disabled={status === 'sending'}
-        className="btn-primary w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {status === 'sending' ? (
-          <>
-            <span className="animate-spin w-4 h-4 border-2 border-background border-t-transparent rounded-full" />
-            Enviando...
-          </>
-        ) : (
-          <>
-            <Send size={16} />
-            Enviar mensaje
-          </>
+      <div aria-live="polite">
+        {status === 'success' && (
+          <div className="flex items-center gap-3 p-4 rounded-lg bg-accent-green/10 border border-accent-green/20 text-accent-green text-sm">
+            <CheckCircle size={16} />
+            Se ha abierto tu cliente de correo con el mensaje listo para enviar. Si no se abre, escríbeme directamente a mrabehfathiprofesional@gmail.com.
+          </div>
         )}
+        {status === 'error' && (
+          <div className="flex items-center gap-3 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+            <AlertCircle size={16} />
+            Completa los campos obligatorios (*), o escríbeme directamente a mrabehfathiprofesional@gmail.com
+          </div>
+        )}
+      </div>
+
+      <button type="submit" className="btn-primary w-full justify-center">
+        <Send size={16} />
+        Enviar mensaje
       </button>
 
       <p className="text-xs text-text-muted text-center">
@@ -181,6 +180,6 @@ export default function ContactForm() {
           mrabehfathiprofesional@gmail.com
         </a>
       </p>
-    </div>
+    </form>
   )
 }

@@ -1,6 +1,7 @@
 import SectionTitle from '@/components/SectionTitle'
 import Timeline from '@/components/Timeline'
 import SkillBadge from '@/components/SkillBadge'
+import Seo from '@/components/Seo'
 import { skillCategories } from '@/data/skills'
 import { timeline } from '@/data/experience'
 import { GraduationCap, Award } from 'lucide-react'
@@ -15,9 +16,15 @@ const certifications = [
 export default function About() {
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title="Sobre mí"
+        description="Perfil de Mrabeh Fathi: administración pública y privada, transición hacia desarrollo web y ciberseguridad, formación DAW/DAM en curso."
+        path="/sobre-mi"
+      />
       <div className="section-container">
         {/* Header */}
         <SectionTitle
+          as="h1"
           label="sobre mí"
           title="Perfil"
           highlight="híbrido"
@@ -67,8 +74,8 @@ export default function About() {
                   ['Disponibilidad', 'Inmediata'],
                 ].map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-2">
-                    <span className="text-text-muted">{k}</span>
-                    <span className="text-text-dim text-right">{v}</span>
+                    <span className="text-text-muted flex-shrink-0">{k}</span>
+                    <span className="text-text-dim text-right min-w-0 break-words">{v}</span>
                   </div>
                 ))}
               </div>
