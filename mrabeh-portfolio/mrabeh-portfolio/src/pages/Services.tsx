@@ -25,7 +25,7 @@ const faq = [
   },
   {
     q: '¿Puedes trabajar en proyectos de ciberseguridad para empresas sin equipo técnico interno?',
-    a: 'Absolutamente. Me especializo en ofrecer diagnóstico y soluciones accesibles a empresas que no tienen equipo de seguridad propio.',
+    a: 'Puedo ofrecer una primera revisión de seguridad básica (buenas prácticas OWASP, configuraciones) para empresas sin equipo de seguridad propio. No sustituyo una auditoría profesional para necesidades avanzadas.',
   },
 ]
 

@@ -92,7 +92,7 @@ export default function CV() {
               Proyectos destacados
             </h3>
             <div className="grid sm:grid-cols-2 gap-3 text-sm">
-              {['NEXARO AI (SaaS Cybersecurity)', 'CLAW Framework (Auditoría Linux)', 'Golytics (ML Analytics)', 'Netseer (Network Analyzer)'].map((p) => (
+              {['NEXARO (diseño completo, en desarrollo)', 'CLAW Framework (Auditoría Linux)', 'Golytics (ML Analytics)', 'Netseer (Network Analyzer)'].map((p) => (
                 <div key={p} className="flex items-center gap-2 text-text-dim">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   {p}
