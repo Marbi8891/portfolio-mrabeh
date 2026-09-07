@@ -98,10 +98,10 @@ const specializations = [
 ]
 
 const stats = [
-  { label: 'Proyectos activos', value: '7+' },
-  { label: 'Tecnologías', value: '20+' },
-  { label: 'Años en tech', value: '3+' },
-  { label: 'Certificaciones', value: 'eJPT→' },
+  { label: 'Formación', value: 'DAW/DAM' },
+  { label: 'Certificación', value: 'eJPT (en progreso)' },
+  { label: 'Certificación', value: 'PCAP (en progreso)' },
+  { label: 'Ubicación', value: 'Madrid' },
 ]
 
 export default function Home() {
@@ -164,20 +164,19 @@ export default function Home() {
             <div className="text-xl sm:text-2xl font-display font-semibold mb-6 h-8">
               <TypedText
                 words={[
-                  'Desarrollador Web Full-Stack',
-                  'Especialista en Ciberseguridad',
-                  'Automatización e IA',
-                  'Perfil Tech-Business',
+                  'Desarrollador Web en formación',
+                  'Ciberseguridad en progreso (eJPT)',
+                  'Automatización con Python',
                 ]}
               />
             </div>
 
             <p className="text-text-dim text-lg leading-relaxed mb-8 max-w-2xl">
-              Perfil híbrido con base administrativa, visión de negocio y especialización progresiva en{' '}
-              <span className="text-text">ciberseguridad</span>,{' '}
-              <span className="text-text">desarrollo web</span> e{' '}
-              <span className="text-text">inteligencia artificial</span>.
-              Construyo soluciones digitales reales para empresas.
+              Vengo de años gestionando procesos administrativos en el sector público y privado.
+              Hoy estoy en transición activa hacia{' '}
+              <span className="text-text">desarrollo web</span> y{' '}
+              <span className="text-text">ciberseguridad</span>, formándome en DAW/DAM y
+              preparando eJPT, y construyendo NEXARO como mi primer proyecto propio serio.
             </p>
 
             {/* CTAs */}
@@ -249,8 +248,8 @@ export default function Home() {
                 </p>
                 <p>
                   Hoy combino esa experiencia con formación en <span className="text-text font-medium">DAW/DAM</span>,
-                  especialización en <span className="text-text font-medium">ciberseguridad</span>{' '}
-                  (eJPT → OSCP), y un portfolio de proyectos reales en producción.
+                  preparación de <span className="text-text font-medium">ciberseguridad</span>{' '}
+                  (eJPT en progreso), y NEXARO como primer proyecto propio en construcción.
                 </p>
               </div>
               <div className="mt-6">
@@ -276,8 +275,8 @@ export default function Home() {
                   <p className="pl-4"><span className="text-accent-green">"nombre"</span>: <span className="text-yellow-400">"Mrabeh Fathi"</span>,</p>
                   <p className="pl-4"><span className="text-accent-green">"rol"</span>: <span className="text-yellow-400">"Full-Stack + Cyber"</span>,</p>
                   <p className="pl-4"><span className="text-accent-green">"ubicación"</span>: <span className="text-yellow-400">"Madrid, ES"</span>,</p>
-                  <p className="pl-4"><span className="text-accent-green">"stack"</span>: [<span className="text-yellow-400">"Python"</span>, <span className="text-yellow-400">"React"</span>, <span className="text-yellow-400">"Docker"</span>],</p>
-                  <p className="pl-4"><span className="text-accent-green">"modo"</span>: <span className="text-yellow-400">"producción"</span>,</p>
+                  <p className="pl-4"><span className="text-accent-green">"stack"</span>: [<span className="text-yellow-400">"Python"</span>, <span className="text-yellow-400">"React"</span>, <span className="text-yellow-400">"TypeScript"</span>],</p>
+                  <p className="pl-4"><span className="text-accent-green">"estado"</span>: <span className="text-yellow-400">"en formación DAW/DAM"</span>,</p>
                   <p className="pl-4"><span className="text-accent-green">"disponible"</span>: <span className="text-accent">true</span></p>
                   <p>{'}'}</p>
                 </div>
