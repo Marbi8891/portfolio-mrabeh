@@ -14,9 +14,40 @@ export interface Project {
     github?: string
     demo?: string
   }
+  /**
+   * Route to a dedicated case-study page for this project (e.g.
+   * "/proyectos/owasp-web-auditor"). Optional: most projects only link out
+   * via `links.github`/`links.demo`. When present, ProjectCard links here
+   * instead of back to the project list, and shows a short evidence line.
+   */
+  caseStudyPath?: string
+  /**
+   * Short, verifiable facts shown on the card as proof, not adjectives
+   * (e.g. "492 tests", "19 reglas"). Only for projects with a public,
+   * checkable source - never a substitute for verifying the numbers.
+   */
+  evidence?: string[]
 }
 
 export const projects: Project[] = [
+  {
+    id: 'owasp-web-auditor',
+    title: 'OWASP Web Auditor',
+    subtitle: 'Passive Web Security Posture Scanner',
+    description: 'Escáner pasivo de postura de seguridad web en TypeScript: analiza HTTPS, cabeceras, cookies, CSP, HSTS, certificado TLS y registros DNS de un dominio y devuelve hallazgos versionados con severidad y confianza explícitas. No es una herramienta de pentesting: nunca envía payloads ni explota nada.',
+    longDescription: 'OWASP Web Auditor es un monorepo TypeScript (pnpm) con cinco paquetes: contracts (tipos compartidos), scanner-core (adquisición de red segura, resolución DNS validada, cliente HTTP/TLS), security-rules (19 reglas de auditoría organizadas en TRANSPORT/TLS/HEADERS/DNS) y scoring (puntuación 0-100 determinista). scanner-core resuelve el hostname, valida cada dirección candidata contra rangos privados/loopback/link-local/metadatos de nube, y ancla la conexión TCP a esa dirección ya validada para cerrar la ventana de DNS rebinding; cada redirección repite el proceso completo de forma independiente. Un check que falla nunca se reporta como "sin hallazgos": el estado queda en FAILED/UNKNOWN de forma explícita. Repositorio público bajo licencia MIT, con 492 tests (reglas doradas, fuzzing, invariantes de seguridad, SSRF adversarial, límites de recursos) verificados en el momento de escribir este caso.',
+    tags: ['TypeScript', 'Node.js', 'Vitest', 'pnpm', 'CLI', 'Seguridad Web', 'OWASP'],
+    category: 'cybersecurity',
+    status: 'active',
+    featured: true,
+    icon: 'ShieldCheck',
+    color: '#00d4ff',
+    links: {
+      github: 'https://github.com/Marbi8891/owasp-web-auditor',
+    },
+    caseStudyPath: '/proyectos/owasp-web-auditor',
+    evidence: ['19 reglas', '492 tests', 'MIT · público'],
+  },
   {
     id: 'nexaro-ai',
     title: 'NEXARO',

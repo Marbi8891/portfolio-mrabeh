@@ -1,4 +1,4 @@
-import { ArrowUpRight, Github, ExternalLink, Shield, Terminal, BarChart3, Network, Brain, Lock, Calculator, type LucideProps } from 'lucide-react'
+import { ArrowUpRight, Github, ExternalLink, Shield, ShieldCheck, Terminal, BarChart3, Network, Brain, Lock, Calculator, type LucideProps } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Project } from '@/data/projects'
 import type { ForwardRefExoticComponent, RefAttributes } from 'react'
@@ -7,6 +7,7 @@ type LucideIcon = ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttrib
 
 const iconMap: Record<string, LucideIcon> = {
   Shield,
+  ShieldCheck,
   Terminal,
   BarChart3,
   Network,
@@ -44,8 +45,8 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         borderColor: `${project.color}15`,
       }}
     >
-      {/* Featured badge */}
-      {featured && (
+      {/* Featured / case-study badge */}
+      {(featured || project.caseStudyPath) && (
         <div
           className="absolute top-4 right-4 text-xs font-mono px-2 py-0.5 rounded-full"
           style={{
@@ -54,7 +55,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             color: project.color,
           }}
         >
-          Destacado
+          {project.caseStudyPath ? 'Caso 01' : 'Destacado'}
         </div>
       )}
 
@@ -95,6 +96,15 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         )}
       </div>
 
+      {/* Evidence (verifiable facts, not adjectives) */}
+      {project.evidence && project.evidence.length > 0 && (
+        <div className="flex items-center gap-2 mb-5 font-mono text-xs text-text-dim">
+          <span className="uppercase tracking-widest text-text-muted">Evidence</span>
+          <span aria-hidden="true" className="text-border-bright">/</span>
+          <span>{project.evidence.join(' · ')}</span>
+        </div>
+      )}
+
       {/* Footer */}
       <div className="flex items-center justify-between pt-4 border-t border-border">
         <span
@@ -127,11 +137,11 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             </a>
           )}
           <Link
-            to={`/proyectos`}
+            to={project.caseStudyPath ?? '/proyectos'}
             className="flex items-center gap-1 text-sm text-text-dim hover:text-accent transition-colors group/link"
             style={{ color: project.color }}
           >
-            <span className="text-xs font-mono">ver_más</span>
+            <span className="text-xs font-mono">{project.caseStudyPath ? 'ver_caso' : 'ver_más'}</span>
             <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
           </Link>
         </div>
