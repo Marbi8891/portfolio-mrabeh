@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import SectionTitle from '@/components/SectionTitle'
 import ProjectCard from '@/components/ProjectCard'
+import Seo from '@/components/Seo'
 import { projects } from '@/data/projects'
 import type { Project } from '@/data/projects'
 
@@ -21,12 +22,18 @@ export default function Projects() {
 
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title="Proyectos"
+        description="Proyectos de Mrabeh Fathi en desarrollo web, ciberseguridad y automatización, cada uno con su estado real."
+        path="/proyectos"
+      />
       <div className="section-container">
         <SectionTitle
+          as="h1"
           label="portfolio"
           title="Proyectos"
           highlight="reales"
-          description="Plataformas SaaS, frameworks de seguridad, herramientas de análisis y aplicaciones web construidas en producción."
+          description="Proyectos propios en distintas fases: diseño, construcción y aprendizaje. Cada tarjeta indica su estado real."
         />
 
         {/* Filters */}
@@ -35,6 +42,7 @@ export default function Projects() {
             <button
               key={cat.key}
               onClick={() => setFilter(cat.key)}
+              aria-pressed={filter === cat.key}
               className={`px-4 py-2 rounded-lg text-sm font-mono transition-all duration-200 ${
                 filter === cat.key
                   ? 'bg-accent text-background font-bold'

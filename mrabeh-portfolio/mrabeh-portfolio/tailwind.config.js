@@ -15,7 +15,7 @@ export default {
         'accent-green': '#00ff88',
         text: '#e2e8f0',
         'text-dim': '#94a3b8',
-        'text-muted': '#475569',
+        'text-muted': '#7d8aa0',
       },
       fontFamily: {
         display: ['"Syne"', 'sans-serif'],

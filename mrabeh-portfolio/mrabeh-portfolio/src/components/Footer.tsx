@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Shield, Linkedin, Mail, MapPin, ExternalLink } from 'lucide-react'
+import { Shield, Linkedin, Github, Mail, MapPin, ExternalLink } from 'lucide-react'
 
 const footerLinks = {
   nav: [
@@ -50,6 +50,15 @@ export default function Footer() {
               >
                 <Linkedin size={14} />
                 linkedin.com/in/mrabehfathi
+              </a>
+              <a
+                href="https://github.com/Marbi8891"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-accent transition-colors"
+              >
+                <Github size={14} />
+                github.com/Marbi8891
               </a>
               <span className="flex items-center gap-2">
                 <MapPin size={14} />

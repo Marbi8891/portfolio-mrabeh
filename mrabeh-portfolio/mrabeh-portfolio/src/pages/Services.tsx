@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Code2, Shield, Zap, Monitor, BarChart2, FileText, ArrowRight, type LucideProps } from 'lucide-react'
 import SectionTitle from '@/components/SectionTitle'
+import Seo from '@/components/Seo'
 import { services } from '@/data/experience'
 import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 
@@ -25,15 +26,21 @@ const faq = [
   },
   {
     q: '¿Puedes trabajar en proyectos de ciberseguridad para empresas sin equipo técnico interno?',
-    a: 'Absolutamente. Me especializo en ofrecer diagnóstico y soluciones accesibles a empresas que no tienen equipo de seguridad propio.',
+    a: 'Puedo ofrecer una primera revisión de seguridad básica (buenas prácticas OWASP, configuraciones) para empresas sin equipo de seguridad propio. No sustituyo una auditoría profesional para necesidades avanzadas.',
   },
 ]
 
 export default function Services() {
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title="Servicios"
+        description="Desarrollo web, primera revisión de seguridad básica y automatización de procesos para pequeñas empresas."
+        path="/servicios"
+      />
       <div className="section-container">
         <SectionTitle
+          as="h1"
           label="servicios"
           title="Cómo puedo"
           highlight="ayudarte"

@@ -3,7 +3,7 @@
 > Portfolio profesional · React + Vite + TypeScript + Tailwind CSS  
 > Desplegado **gratuitamente** en Cloudflare Pages · CDN global · SSL automático
 
-**Dominio:** [mrabehfathi.com](https://mrabehfathi.com)
+**Dominio:** [mrabehfathi.es](https://mrabehfathi.es)
 
 ---
 
@@ -13,9 +13,9 @@
 2. [Estructura del proyecto](#estructura-del-proyecto)
 3. [Desarrollo local](#desarrollo-local)
 4. [Despliegue gratuito en Cloudflare Pages](#despliegue-gratuito-en-cloudflare-pages)
-5. [Conectar dominio mrabehfathi.com](#conectar-dominio-mrabehfathicom)
+5. [Conectar dominio mrabehfathi.es](#conectar-dominio-mrabehfathicom)
 6. [Variables de entorno en Cloudflare](#variables-de-entorno-en-cloudflare)
-7. [Formulario de contacto (Formspree)](#formulario-de-contacto-formspree)
+7. [Formulario de contacto](#formulario-de-contacto)
 8. [SEO y rendimiento](#seo-y-rendimiento)
 9. [Actualizar la web](#actualizar-la-web)
 10. [Personalización de contenido](#personalización-de-contenido)
@@ -31,11 +31,10 @@
 | Estilos | Tailwind CSS v3 |
 | Routing | React Router v6 |
 | Iconos | Lucide React |
-| Animaciones | Framer Motion |
 | Hosting | **Cloudflare Pages** (gratis) |
 | CDN | Cloudflare Global Network (300+ PoPs) |
 | SSL | Automático (Let's Encrypt via Cloudflare) |
-| Formulario | Formspree |
+| Formulario | mailto (sin backend externo) |
 
 ---
 
@@ -180,19 +179,19 @@ A partir de ahora, **cada `git push` a `main` redespliega automáticamente**.
 
 ---
 
-## Conectar dominio mrabehfathi.com
+## Conectar dominio mrabehfathi.es
 
 ### Paso 1 — Añadir el dominio raíz
 
 1. En Cloudflare Pages → tu proyecto → pestaña **Custom domains**
 2. Clic en **Set up a custom domain**
-3. Escribir: `mrabehfathi.com`
+3. Escribir: `mrabehfathi.es`
 4. Clic en **Continue** → **Activate domain**
 
-### Paso 2 — Añadir www.mrabehfathi.com
+### Paso 2 — Añadir www.mrabehfathi.es
 
 1. Repetir el proceso anterior
-2. Esta vez escribir: `www.mrabehfathi.com`
+2. Esta vez escribir: `www.mrabehfathi.es`
 3. Cloudflare gestiona automáticamente la redirección entre raíz y www
 
 ### Paso 3 — Configurar DNS en Hostinger
@@ -204,7 +203,7 @@ Si el dominio está en Hostinger:
 
 **Opción A — Transferir nameservers a Cloudflare (recomendado):**
 
-En Cloudflare → **Add a site** → introducir `mrabehfathi.com` → plan Free.
+En Cloudflare → **Add a site** → introducir `mrabehfathi.es` → plan Free.
 Cloudflare dará dos nameservers (ej: `ada.ns.cloudflare.com`).
 En Hostinger → cambiar los nameservers por los de Cloudflare.
 Ventaja: propagación instantánea, mayor control, protección DDoS.
@@ -228,44 +227,21 @@ No es necesario instalar ni renovar certificados manualmente.
 
 ## Variables de entorno en Cloudflare
 
-Para configurar el ID de Formspree u otras variables:
-
-1. Cloudflare Pages → tu proyecto → **Settings** → **Environment variables**
-2. Clic en **Add variable**
-3. Añadir:
-
-| Variable | Valor |
-|----------|-------|
-| `NODE_VERSION` | `20` |
-| `VITE_FORMSPREE_ID` | `tu_id_de_formspree` |
-
-4. Clic en **Save**
-5. Ir a **Deployments** → **Retry deployment** para aplicar los cambios
-
-> Las variables `VITE_*` son públicas (se incluyen en el bundle del cliente).
-> Nunca pongas secretos (API keys privadas) con prefijo `VITE_`.
+Este proyecto no requiere variables de entorno propias en producción. Si en el futuro se añaden,
+se configuran en Cloudflare Pages → tu proyecto → **Settings** → **Environment variables**.
 
 ---
 
-## Formulario de contacto (Formspree)
+## Formulario de contacto
 
-1. Registrarse en [formspree.io](https://formspree.io) — gratis hasta 50 envíos/mes
-2. Crear un nuevo formulario → copiar el ID (ej: `xpwzkvnb`)
-3. Editar `src/components/ContactForm.tsx`:
-   ```typescript
-   // Línea ~31 — sustituir YOUR_FORM_ID por tu ID real
-   const response = await fetch('https://formspree.io/f/xpwzkvnb', {
-   ```
-4. Commit y push → Cloudflare redespliega automáticamente
+`src/components/ContactForm.tsx` no depende de ningún servicio externo: al enviar, abre el cliente
+de correo del visitante (`mailto:`) con el mensaje ya redactado a partir de los campos del
+formulario. Funciona sin configuración adicional.
 
-**Alternativa con Variable de Entorno:**
-
-```typescript
-const FORM_ID = import.meta.env.VITE_FORMSPREE_ID
-const response = await fetch(`https://formspree.io/f/${FORM_ID}`, {
-```
-
-Y añadir `VITE_FORMSPREE_ID` en Cloudflare → Settings → Environment variables.
+Si en el futuro se quiere un backend real (para no depender de que el visitante tenga un cliente
+de correo configurado), la opción más simple es [Formspree](https://formspree.io): crear un
+formulario allí, y sustituir el `mailto:` de `handleSubmit` por un `fetch` a
+`https://formspree.io/f/<tu_id>` con el mismo `formData`.
 
 ---
 
@@ -288,7 +264,7 @@ Y añadir `VITE_FORMSPREE_ID` en Cloudflare → Settings → Environment variabl
 ```
 User-agent: *
 Allow: /
-Sitemap: https://mrabehfathi.com/sitemap.xml
+Sitemap: https://mrabehfathi.es/sitemap.xml
 ```
 
 **`public/sitemap.xml`:**
@@ -296,24 +272,24 @@ Sitemap: https://mrabehfathi.com/sitemap.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://mrabehfathi.com/</loc>
+    <loc>https://mrabehfathi.es/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://mrabehfathi.com/sobre-mi</loc>
+    <loc>https://mrabehfathi.es/sobre-mi</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://mrabehfathi.com/proyectos</loc>
+    <loc>https://mrabehfathi.es/proyectos</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://mrabehfathi.com/servicios</loc>
+    <loc>https://mrabehfathi.es/servicios</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://mrabehfathi.com/contacto</loc>
+    <loc>https://mrabehfathi.es/contacto</loc>
     <priority>0.7</priority>
   </url>
 </urlset>

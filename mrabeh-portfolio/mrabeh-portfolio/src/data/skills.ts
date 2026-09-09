@@ -3,70 +3,58 @@ export interface SkillCategory {
   skills: Skill[]
 }
 
+export type SkillLevel = 'Básico' | 'Intermedio' | 'Avanzado' | 'En aprendizaje'
+
 export interface Skill {
   name: string
-  level: number // 1-5
-  icon?: string
+  level: SkillLevel
 }
 
+// Niveles autoevaluados sobre evidencia demostrada (explicar + implementar + debuggear +
+// verificar + hacerlo con autonomía), no sobre exposición o potencial.
 export const skillCategories: SkillCategory[] = [
   {
-    category: 'Lenguajes & Frameworks',
+    category: 'Lenguajes',
     skills: [
-      { name: 'Python', level: 5 },
-      { name: 'TypeScript', level: 4 },
-      { name: 'JavaScript', level: 4 },
-      { name: 'React', level: 4 },
-      { name: 'FastAPI', level: 5 },
-      { name: 'HTML/CSS', level: 5 },
-      { name: 'Bash/Shell', level: 4 },
-      { name: 'SQL', level: 4 },
+      { name: 'Python', level: 'Intermedio' },
+      { name: 'SQL', level: 'Básico' },
+      { name: 'TypeScript / JavaScript', level: 'Básico' },
+      { name: 'Java', level: 'Básico' },
+      { name: 'Bash', level: 'Básico' },
+      { name: 'C', level: 'En aprendizaje' },
     ],
   },
   {
-    category: 'Infraestructura & DevOps',
+    category: 'Web',
     skills: [
-      { name: 'Docker', level: 4 },
-      { name: 'Linux', level: 5 },
-      { name: 'Nginx', level: 4 },
-      { name: 'Git / GitHub', level: 5 },
-      { name: 'PostgreSQL', level: 4 },
-      { name: 'Redis', level: 3 },
-      { name: 'Docker Compose', level: 4 },
-      { name: 'Ubuntu Server', level: 4 },
+      { name: 'HTML / CSS', level: 'Intermedio' },
+      { name: 'React', level: 'Básico' },
+      { name: 'APIs / FastAPI', level: 'Intermedio' },
+      { name: 'Bases de datos relacionales', level: 'Intermedio' },
+    ],
+  },
+  {
+    category: 'Infraestructura',
+    skills: [
+      { name: 'Linux', level: 'Básico' },
+      { name: 'Redes (subnetting, routing, DNS, NAT)', level: 'Intermedio' },
+      { name: 'Git / GitHub', level: 'Básico' },
+      { name: 'Docker', level: 'En aprendizaje' },
+      { name: 'Cloud (fundamentos)', level: 'Básico' },
     ],
   },
   {
     category: 'Ciberseguridad',
     skills: [
-      { name: 'Kali Linux', level: 4 },
-      { name: 'Wireshark', level: 3 },
-      { name: 'Burp Suite', level: 3 },
-      { name: 'OWASP Top 10', level: 4 },
-      { name: 'Nmap / Netcat', level: 4 },
-      { name: 'Análisis Forense', level: 3 },
-      { name: 'Blue Team', level: 3 },
-      { name: 'MITRE ATT&CK', level: 3 },
-    ],
-  },
-  {
-    category: 'Datos & IA',
-    skills: [
-      { name: 'Power BI', level: 3 },
-      { name: 'Excel Avanzado', level: 5 },
-      { name: 'scikit-learn', level: 3 },
-      { name: 'Pandas / NumPy', level: 4 },
-      { name: 'IA Generativa', level: 4 },
-      { name: 'Automatización', level: 5 },
-      { name: 'APIs REST', level: 5 },
-      { name: 'Web Scraping', level: 4 },
+      { name: 'Seguridad ofensiva (eJPT en progreso)', level: 'Básico' },
+      { name: 'Seguridad defensiva', level: 'Básico' },
+      { name: 'Kali Linux / Nmap / Wireshark / Burp Suite', level: 'En aprendizaje' },
+      { name: 'OWASP Top 10', level: 'En aprendizaje' },
     ],
   },
 ]
 
 export const techStack = [
-  'Python', 'FastAPI', 'React', 'TypeScript', 'Docker',
-  'PostgreSQL', 'Linux', 'Nginx', 'Git', 'Redis',
-  'Kali Linux', 'Wireshark', 'Burp Suite', 'OWASP',
-  'Power BI', 'Excel', 'Bash', 'HTML', 'CSS', 'SQL',
+  'Python', 'FastAPI', 'React', 'TypeScript', 'SQL',
+  'Linux', 'Git', 'Redes', 'Docker', 'Ciberseguridad',
 ]

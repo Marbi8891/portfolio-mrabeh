@@ -1,6 +1,15 @@
+import type { SkillLevel } from '@/data/skills'
+
 interface SkillBadgeProps {
   name: string
-  level?: number
+  level?: SkillLevel
+}
+
+const levelColor: Record<SkillLevel, string> = {
+  'Avanzado': '#00ff88',
+  'Intermedio': '#00d4ff',
+  'Básico': '#7c3aed',
+  'En aprendizaje': '#f59e0b',
 }
 
 export default function SkillBadge({ name, level }: SkillBadgeProps) {
@@ -10,16 +19,16 @@ export default function SkillBadge({ name, level }: SkillBadgeProps) {
         {name}
       </span>
       {level && (
-        <div className="flex gap-1">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <div
-              key={i}
-              className={`w-1.5 h-1.5 rounded-full transition-all ${
-                i < level ? 'bg-accent' : 'bg-border'
-              }`}
-            />
-          ))}
-        </div>
+        <span
+          className="text-xs font-mono px-2 py-0.5 rounded-full flex-shrink-0"
+          style={{
+            color: levelColor[level],
+            background: `${levelColor[level]}12`,
+            border: `1px solid ${levelColor[level]}30`,
+          }}
+        >
+          {level}
+        </span>
       )}
     </div>
   )

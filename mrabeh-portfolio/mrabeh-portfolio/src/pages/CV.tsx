@@ -1,8 +1,14 @@
 import { Download, FileText, ExternalLink } from 'lucide-react'
+import Seo from '@/components/Seo'
 
 export default function CV() {
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title="CV"
+        description="Currículum de Mrabeh Fathi Boussayff: experiencia, formación DAW/DAM y certificaciones en progreso (eJPT, PCAP)."
+        path="/cv"
+      />
       <div className="section-container max-w-4xl">
         <div className="text-center mb-12">
           <p className="font-mono text-accent text-sm mb-3 tracking-widest">// curriculum vitae</p>
@@ -48,20 +54,20 @@ export default function CV() {
               </h3>
               <div className="space-y-3 text-sm text-text-dim">
                 <div>
-                  <p className="text-text font-medium">Trabajo Internacional</p>
-                  <p className="text-xs text-text-muted">Arabia Saudí · 2025</p>
+                  <p className="text-text font-medium">Proyecto NEOM–Trojena (OSSA), Arabia Saudí</p>
+                  <p className="text-xs text-text-muted">Apoyo administrativo · Ene–Mar 2025</p>
                 </div>
                 <div>
-                  <p className="text-text font-medium">Agencia de Empleo de Madrid</p>
-                  <p className="text-xs text-text-muted">Gestión administrativa · 2020–2024</p>
+                  <p className="text-text font-medium">Construcciones Sánchez Domínguez Sando</p>
+                  <p className="text-xs text-text-muted">Apoyo administrativo · Oct–Dic 2023</p>
                 </div>
                 <div>
                   <p className="text-text font-medium">Ayuntamiento de Leganés</p>
-                  <p className="text-xs text-text-muted">Administración pública · 2020–2022</p>
+                  <p className="text-xs text-text-muted">Gestión administrativa · Abr–Oct 2021</p>
                 </div>
                 <div>
-                  <p className="text-text font-medium">Fundación COCEMFE · SANDO</p>
-                  <p className="text-xs text-text-muted">Sector privado · 2018–2021</p>
+                  <p className="text-text font-medium">Agencia Local de Empleo</p>
+                  <p className="text-xs text-text-muted">Gestión administrativa · Dic 2017–Jun 2018</p>
                 </div>
               </div>
             </div>
@@ -73,18 +79,14 @@ export default function CV() {
               <div className="space-y-3 text-sm text-text-dim">
                 <div>
                   <p className="text-text font-medium">DAW + DAM</p>
-                  <p className="text-xs text-text-muted">FP Superior · 2023–2028</p>
+                  <p className="text-xs text-text-muted">FP Aspasia, Leganés · En curso</p>
                 </div>
                 <div>
-                  <p className="text-text font-medium">eJPT (en progreso)</p>
-                  <p className="text-xs text-text-muted">eLearnSecurity / INE · 2025</p>
+                  <p className="text-text font-medium">eJPT — Junior Penetration Tester</p>
+                  <p className="text-xs text-text-muted">eLearnSecurity / INE · En progreso</p>
                 </div>
                 <div>
-                  <p className="text-text font-medium">Ciberseguridad y GRC</p>
-                  <p className="text-xs text-text-muted">Formación práctica continua</p>
-                </div>
-                <div>
-                  <p className="text-text font-medium">Python PCAP</p>
+                  <p className="text-text font-medium">PCAP — Python Certified Associate</p>
                   <p className="text-xs text-text-muted">Python Institute · En progreso</p>
                 </div>
               </div>
@@ -96,7 +98,7 @@ export default function CV() {
               Proyectos destacados
             </h3>
             <div className="grid sm:grid-cols-2 gap-3 text-sm">
-              {['NEXARO AI (SaaS Cybersecurity)', 'CLAW Framework (Auditoría Linux)', 'Golytics (ML Analytics)', 'Netseer (Network Analyzer)'].map((p) => (
+              {['NEXARO (diseño completo, en desarrollo)', 'CLAW Framework (Auditoría Linux)', 'Golytics (ML Analytics)', 'Netseer (Network Analyzer)'].map((p) => (
                 <div key={p} className="flex items-center gap-2 text-text-dim">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                   {p}

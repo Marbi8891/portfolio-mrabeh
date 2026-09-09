@@ -1,6 +1,7 @@
 import SectionTitle from '@/components/SectionTitle'
 import Timeline from '@/components/Timeline'
 import SkillBadge from '@/components/SkillBadge'
+import Seo from '@/components/Seo'
 import { skillCategories } from '@/data/skills'
 import { timeline } from '@/data/experience'
 import { GraduationCap, Award } from 'lucide-react'
@@ -8,22 +9,26 @@ import { GraduationCap, Award } from 'lucide-react'
 const certifications = [
   { name: 'eJPT – Junior Penetration Tester', org: 'eLearnSecurity / INE', status: 'En progreso', color: '#00d4ff' },
   { name: 'PCAP – Python Certified Associate', org: 'Python Institute', status: 'En progreso', color: '#7c3aed' },
-  { name: 'Desarrollo de Aplicaciones Web (DAW)', org: 'FP Aspasia / Alcazarén', status: 'Activo', color: '#00ff88' },
-  { name: 'Desarrollo de Aplicaciones Multiplataforma (DAM)', org: 'FP Aspasia / Alcazarén', status: 'Activo', color: '#00ff88' },
-  { name: 'Ciberseguridad – Blue Team y GRC', org: 'Formación práctica', status: 'Continuo', color: '#f59e0b' },
-  { name: 'OSCP – Offensive Security Certified Professional', org: 'Offensive Security', status: 'Objetivo 2026', color: '#f59e0b' },
+  { name: 'Desarrollo de Aplicaciones Web (DAW)', org: 'FP Aspasia, Leganés', status: 'En curso', color: '#00ff88' },
+  { name: 'Desarrollo de Aplicaciones Multiplataforma (DAM)', org: 'FP Aspasia, Leganés', status: 'En curso', color: '#00ff88' },
 ]
 
 export default function About() {
   return (
     <div className="pt-24 pb-20">
+      <Seo
+        title="Sobre mí"
+        description="Perfil de Mrabeh Fathi: administración pública y privada, transición hacia desarrollo web y ciberseguridad, formación DAW/DAM en curso."
+        path="/sobre-mi"
+      />
       <div className="section-container">
         {/* Header */}
         <SectionTitle
+          as="h1"
           label="sobre mí"
           title="Perfil"
           highlight="híbrido"
-          description="Administración + Tecnología + Ciberseguridad. Un perfil que entiende los procesos, construye las soluciones y protege los sistemas."
+          description="Administración + Tecnología + Ciberseguridad. Un perfil que entiende los procesos, construye soluciones y está aprendiendo a proteger los sistemas."
         />
 
         {/* Bio */}
@@ -36,10 +41,12 @@ export default function About() {
               empresas que necesitan eficiencia, seguridad y modernización.
             </p>
             <p>
-              Mi trayectoria combina años de experiencia en gestión administrativa (Ayuntamiento
-              de Leganés, COCEMFE, SANDO, Agencia de Empleo) con formación técnica intensiva
-              en <strong className="text-text">DAW/DAM</strong>, <strong className="text-text">ciberseguridad</strong> y
-              un portfolio de proyectos propios en producción.
+              Mi trayectoria combina experiencia en gestión administrativa (Ayuntamiento
+              de Leganés, Fundación COCEMFE, Construcciones Sando, Agencia Local de Empleo, y
+              apoyo administrativo en el proyecto NEOM–Trojena en Arabia Saudí) con formación técnica
+              intensiva en <strong className="text-text">DAW/DAM</strong>, preparación
+              de <strong className="text-text">ciberseguridad</strong> (eJPT, PCAP) y NEXARO
+              como primer proyecto propio.
             </p>
             <p>
               Lo que me diferencia: entiendo los procesos de negocio desde dentro. Sé qué
@@ -63,12 +70,12 @@ export default function About() {
                   ['Ubicación', 'Madrid / Leganés'],
                   ['Email', 'mrabehfathiprofesional@gmail.com'],
                   ['LinkedIn', 'mrabehfathi'],
-                  ['Idiomas', 'ES · AR · EN (básico)'],
+                  ['Idiomas', 'ES · AR nativos · EN avanzado (TOEIC 950)'],
                   ['Disponibilidad', 'Inmediata'],
                 ].map(([k, v]) => (
                   <div key={k} className="flex justify-between gap-2">
-                    <span className="text-text-muted">{k}</span>
-                    <span className="text-text-dim text-right">{v}</span>
+                    <span className="text-text-muted flex-shrink-0">{k}</span>
+                    <span className="text-text-dim text-right min-w-0 break-words">{v}</span>
                   </div>
                 ))}
               </div>

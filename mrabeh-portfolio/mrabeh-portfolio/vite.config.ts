@@ -33,11 +33,10 @@ export default defineConfig({
 
     rollupOptions: {
       output: {
-        // Code-splitting: vendor, motion, icons en chunks separados
+        // Code-splitting: vendor, icons en chunks separados
         // → mejor cache del navegador entre actualizaciones
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
-          motion: ['framer-motion'],
           icons: ['lucide-react'],
         },
         // Nombres con hash para cache busting automático
