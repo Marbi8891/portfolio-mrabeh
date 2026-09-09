@@ -3,6 +3,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Home from '@/pages/Home'
 import Projects from '@/pages/Projects'
+import OwaspWebAuditor from '@/pages/projects/OwaspWebAuditor'
 import About from '@/pages/About'
 import Services from '@/pages/Services'
 import Contact from '@/pages/Contact'
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/proyectos" element={<Projects />} />
+            <Route path="/proyectos/owasp-web-auditor" element={<OwaspWebAuditor />} />
             <Route path="/sobre-mi" element={<About />} />
             <Route path="/servicios" element={<Services />} />
             <Route path="/contacto" element={<Contact />} />
