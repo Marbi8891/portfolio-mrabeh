@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { AlertCircle, CheckCircle, Send } from 'lucide-react'
+import { AlertCircle, LoaderCircle, Send } from 'lucide-react'
 
 interface FormData {
   name: string
@@ -9,6 +9,7 @@ interface FormData {
   budget: string
   timeline: string
   message: string
+  website: string
 }
 
 const services = [
@@ -36,55 +37,73 @@ const timelines = [
   'Solo estoy valorando opciones',
 ]
 
+const initialFormData: FormData = {
+  name: '',
+  email: '',
+  company: '',
+  service: '',
+  budget: '',
+  timeline: '',
+  message: '',
+  website: '',
+}
+
 export default function ContactForm() {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    company: '',
-    service: '',
-    budget: '',
-    timeline: '',
-    message: '',
-  })
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [formData, setFormData] = useState<FormData>(initialFormData)
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     setFormData((previous) => ({ ...previous, [event.target.name]: event.target.value }))
-    if (status !== 'idle') setStatus('idle')
+    if (status === 'error') {
+      setStatus('idle')
+      setErrorMessage('')
+    }
   }
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     if (!formData.name || !formData.email || !formData.service || !formData.message) {
       setStatus('error')
+      setErrorMessage('Completa nombre, email, servicio y descripción del proyecto.')
       return
     }
 
-    const subject = encodeURIComponent(`[Propuesta] ${formData.service} — ${formData.name}`)
-    const body = encodeURIComponent(
-      [
-        `Nombre: ${formData.name}`,
-        `Email: ${formData.email}`,
-        `Empresa: ${formData.company || '—'}`,
-        `Servicio: ${formData.service}`,
-        `Presupuesto orientativo: ${formData.budget || 'No indicado'}`,
-        `Plazo: ${formData.timeline || 'No indicado'}`,
-        '',
-        'Proyecto / necesidad:',
-        formData.message,
-      ].join('\n')
-    )
+    setStatus('submitting')
+    setErrorMessage('')
 
-    window.location.href = `mailto:mrabehfathiprofesional@gmail.com?subject=${subject}&body=${body}`
-    setStatus('success')
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as { error?: string } | null
+        throw new Error(payload?.error || 'No se ha podido enviar la solicitud.')
+      }
+
+      window.location.assign('/gracias')
+    } catch (error) {
+      setStatus('error')
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : 'No se ha podido enviar la solicitud. Inténtalo de nuevo o escríbeme por email.'
+      )
+    }
   }
 
   const inputClass =
-    'w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text placeholder-text-muted focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 transition-all duration-200'
+    'w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text placeholder-text-muted focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed'
   const labelClass = 'block text-xs font-mono text-text-muted mb-2 uppercase tracking-wider'
+  const submitting = status === 'submitting'
 
   return (
     <form className="space-y-5" onSubmit={handleSubmit} noValidate>
@@ -100,6 +119,7 @@ export default function ContactForm() {
             placeholder="Tu nombre"
             className={inputClass}
             autoComplete="name"
+            disabled={submitting}
             required
           />
         </div>
@@ -114,6 +134,7 @@ export default function ContactForm() {
             placeholder="tu@empresa.com"
             className={inputClass}
             autoComplete="email"
+            disabled={submitting}
             required
           />
         </div>
@@ -130,6 +151,7 @@ export default function ContactForm() {
           placeholder="Nombre de la empresa o proyecto"
           className={inputClass}
           autoComplete="organization"
+          disabled={submitting}
         />
       </div>
 
@@ -141,6 +163,7 @@ export default function ContactForm() {
           value={formData.service}
           onChange={handleChange}
           className={inputClass}
+          disabled={submitting}
           required
         >
           <option value="" disabled>Selecciona un servicio</option>
@@ -159,6 +182,7 @@ export default function ContactForm() {
             value={formData.budget}
             onChange={handleChange}
             className={inputClass}
+            disabled={submitting}
           >
             <option value="">Selecciona una opción</option>
             {budgets.map((budget) => (
@@ -174,6 +198,7 @@ export default function ContactForm() {
             value={formData.timeline}
             onChange={handleChange}
             className={inputClass}
+            disabled={submitting}
           >
             <option value="">Selecciona una opción</option>
             {timelines.map((timeline) => (
@@ -193,32 +218,48 @@ export default function ContactForm() {
           placeholder="Qué quieres conseguir, qué tienes ahora y qué problema quieres resolver..."
           rows={6}
           className={inputClass}
+          disabled={submitting}
           required
         />
       </div>
 
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="cf-website">No rellenar este campo</label>
+        <input
+          id="cf-website"
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div aria-live="polite">
-        {status === 'success' && (
-          <div className="flex items-start gap-3 p-4 rounded-lg bg-accent-green/10 border border-accent-green/20 text-accent-green text-sm">
-            <CheckCircle size={16} className="mt-0.5 flex-shrink-0" />
-            Se ha preparado el mensaje en tu aplicación de correo. Revisa los datos y pulsa enviar para completar la solicitud.
-          </div>
-        )}
         {status === 'error' && (
           <div className="flex items-start gap-3 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
             <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
-            Completa nombre, email, servicio y descripción del proyecto.
+            <div>
+              <p>{errorMessage}</p>
+              <a
+                href="mailto:mrabehfathiprofesional@gmail.com"
+                className="inline-block mt-1 text-accent hover:underline"
+              >
+                Escribir por email
+              </a>
+            </div>
           </div>
         )}
       </div>
 
-      <button type="submit" className="btn-primary w-full justify-center">
-        <Send size={16} />
-        Solicitar propuesta
+      <button type="submit" className="btn-primary w-full justify-center" disabled={submitting}>
+        {submitting ? <LoaderCircle size={16} className="animate-spin" /> : <Send size={16} />}
+        {submitting ? 'Enviando solicitud…' : 'Solicitar propuesta'}
       </button>
 
       <p className="text-xs text-text-muted text-center leading-relaxed">
-        Al enviar se abrirá tu aplicación de correo con la solicitud preparada. También puedes escribir directamente a{' '}
+        Tus datos se utilizan únicamente para responder a esta solicitud. También puedes escribir directamente a{' '}
         <a href="mailto:mrabehfathiprofesional@gmail.com" className="text-accent hover:underline">
           mrabehfathiprofesional@gmail.com
         </a>.
