@@ -4,9 +4,11 @@ import Footer from '@/components/Footer'
 import Home from '@/pages/Home'
 import Projects from '@/pages/Projects'
 import OwaspWebAuditor from '@/pages/projects/OwaspWebAuditor'
+import CommercialCaseStudy from '@/pages/projects/CommercialCaseStudy'
 import About from '@/pages/About'
 import Services from '@/pages/Services'
 import Contact from '@/pages/Contact'
+import ThankYou from '@/pages/ThankYou'
 import CV from '@/pages/CV'
 import AvisoLegal from '@/pages/legal/AvisoLegal'
 import Privacidad from '@/pages/legal/Privacidad'
@@ -23,9 +25,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/proyectos" element={<Projects />} />
             <Route path="/proyectos/owasp-web-auditor" element={<OwaspWebAuditor />} />
+            <Route path="/proyectos/concepto/:projectId" element={<CommercialCaseStudy />} />
             <Route path="/sobre-mi" element={<About />} />
             <Route path="/servicios" element={<Services />} />
             <Route path="/contacto" element={<Contact />} />
+            <Route path="/gracias" element={<ThankYou />} />
             <Route path="/cv" element={<CV />} />
             <Route path="/legal/aviso-legal" element={<AvisoLegal />} />
             <Route path="/legal/privacidad" element={<Privacidad />} />
