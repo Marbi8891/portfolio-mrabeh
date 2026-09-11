@@ -3,7 +3,11 @@ import ProjectCard from '@/components/ProjectCard'
 import SectionTitle from '@/components/SectionTitle'
 import Seo from '@/components/Seo'
 import { projects } from '@/data/projects'
+import { commercialCases } from '@/data/commercialCases'
 import type { Project } from '@/data/projects'
+import type { CommercialCaseProject } from '@/data/commercialCases'
+
+type PortfolioProject = Project | CommercialCaseProject
 
 const categories = [
   { key: 'all', label: 'Todo' },
@@ -16,15 +20,16 @@ const categories = [
 
 export default function Projects() {
   const [filter, setFilter] = useState<string>('all')
+  const allProjects: PortfolioProject[] = [...commercialCases, ...projects]
 
-  const filtered: Project[] =
-    filter === 'all' ? projects : projects.filter((project) => project.category === filter)
+  const filtered: PortfolioProject[] =
+    filter === 'all' ? allProjects : allProjects.filter((project) => project.category === filter)
 
   return (
     <div className="pt-24 pb-20">
       <Seo
         title="Trabajo y casos de estudio | Mrabeh Fathi"
-        description="Casos y proyectos de desarrollo web, automatización y seguridad con contexto, decisiones técnicas y evidencia verificable cuando está disponible."
+        description="Casos comerciales conceptuales y proyectos técnicos de desarrollo web, automatización y seguridad, diferenciados con total transparencia."
         path="/proyectos"
       />
 
@@ -34,14 +39,21 @@ export default function Projects() {
           label="trabajo"
           title="Casos y proyectos"
           highlight="con contexto"
-          description="No todos los proyectos están en la misma fase. Aquí separo lo construido, lo que está en desarrollo y lo que sirve como trabajo técnico de aprendizaje. Cuando existe evidencia pública, la enlazo."
+          description="Los primeros casos son propuestas comerciales conceptuales para mostrar cómo abordaría problemas de negocio concretos. Están identificados como tales. Después encontrarás proyectos técnicos construidos o en desarrollo."
         />
+
+        <div className="rounded-xl border border-amber-400/20 bg-amber-400/5 p-5 mb-8">
+          <p className="font-mono text-xs uppercase tracking-wider text-amber-200 mb-2">Transparencia primero</p>
+          <p className="text-sm text-text-dim leading-relaxed">
+            Un caso marcado como “conceptual” no es un cliente ni contiene resultados reales. Sirve para enseñar criterio de producto, alcance, accesibilidad, seguridad y métricas antes de tener casos comerciales publicables.
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-4 mb-10">
           {[
             ['Problema', 'Qué necesidad o reto intenta resolver cada proyecto.'],
-            ['Decisiones', 'Cómo planteo arquitectura, seguridad, pruebas y límites.'],
-            ['Evidencia', 'Repositorios, tests, demos o casos detallados cuando existen.'],
+            ['Decisiones', 'Cómo planteo arquitectura, seguridad, experiencia y límites.'],
+            ['Evidencia', 'Repositorios y tests en proyectos reales; disclosure explícito en los conceptuales.'],
           ].map(([title, description]) => (
             <div key={title} className="rounded-xl border border-border bg-surface/30 p-5">
               <h2 className="font-display font-bold text-text mb-2">{title}</h2>
