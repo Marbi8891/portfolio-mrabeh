@@ -1,33 +1,50 @@
-import { Mail, Linkedin, MapPin, Clock } from 'lucide-react'
-import SectionTitle from '@/components/SectionTitle'
+import { Link } from 'react-router-dom'
+import { Clock, Linkedin, Mail, MapPin } from 'lucide-react'
 import ContactForm from '@/components/ContactForm'
+import SectionTitle from '@/components/SectionTitle'
 import Seo from '@/components/Seo'
 
 export default function Contact() {
   return (
     <div className="pt-24 pb-20">
       <Seo
-        title="Contacto"
-        description="Contacta con Mrabeh Fathi para roles tech, colaboraciones o proyectos freelance."
+        title="Solicitar propuesta | Mrabeh Fathi"
+        description="Cuéntame tu proyecto web, automatización o necesidad de seguridad y solicita una propuesta de alcance y presupuesto."
         path="/contacto"
       />
+
       <div className="section-container">
         <SectionTitle
           as="h1"
-          label="contacto"
-          title="Hablemos"
-          highlight="en serio"
-          description="Estoy disponible para roles tech, colaboraciones, proyectos freelance y consultoría. Respondo en menos de 24 horas."
+          label="propuesta"
+          title="Cuéntame qué necesitas"
+          highlight="construir o mejorar"
+          description="Cuanta más información me des sobre el objetivo, el punto de partida y el plazo, más útil podrá ser la primera respuesta."
         />
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Info */}
-          <div>
-            <div className="space-y-6 mb-8">
+        <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-14">
+          <aside>
+            <div className="card-glass rounded-2xl p-6 mb-6">
+              <h2 className="font-display font-bold text-lg text-text mb-4">Qué pasa después</h2>
+              <ol className="space-y-4">
+                {[
+                  ['01', 'Reviso el objetivo, alcance y encaje del proyecto.'],
+                  ['02', 'Si necesito contexto adicional, te pediré solo lo imprescindible.'],
+                  ['03', 'Si encaja, te propondré alcance, entregables y siguiente paso.'],
+                ].map(([step, text]) => (
+                  <li key={step} className="flex items-start gap-3">
+                    <span className="font-mono text-xs text-accent mt-0.5">{step}</span>
+                    <span className="text-sm text-text-dim leading-relaxed">{text}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <div className="space-y-5 mb-6">
               {[
                 {
                   icon: Mail,
-                  label: 'Email profesional',
+                  label: 'Email',
                   value: 'mrabehfathiprofesional@gmail.com',
                   href: 'mailto:mrabehfathiprofesional@gmail.com',
                   color: '#00d4ff',
@@ -42,15 +59,13 @@ export default function Contact() {
                 {
                   icon: MapPin,
                   label: 'Ubicación',
-                  value: 'Madrid / Leganés, España',
-                  href: undefined,
+                  value: 'Madrid · proyectos en remoto',
                   color: '#00ff88',
                 },
                 {
                   icon: Clock,
-                  label: 'Disponibilidad',
-                  value: 'Inmediata · Remoto / Híbrido',
-                  href: undefined,
+                  label: 'Modalidad',
+                  value: 'Trabajo por proyecto y por alcance',
                   color: '#f59e0b',
                 },
               ].map((item) => {
@@ -83,31 +98,22 @@ export default function Contact() {
               })}
             </div>
 
-            {/* What I'm looking for */}
-            <div className="card-glass rounded-xl p-6">
-              <h3 className="font-display font-semibold text-sm text-text mb-4 uppercase tracking-wider">
-                Busco activamente
-              </h3>
-              <ul className="space-y-2">
-                {[
-                  'Desarrollador web (Junior/Mid)',
-                  'Soporte IT o sysadmin',
-                  'Analista de ciberseguridad Junior',
-                  'GRC Junior / Compliance',
-                  'Automatización y scripting',
-                  'Proyectos freelance técnicos',
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-text-dim">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+            <div className="rounded-xl border border-border bg-surface/30 p-5">
+              <p className="text-xs font-mono uppercase tracking-wider text-text-muted mb-2">¿Vienes por empleo?</p>
+              <p className="text-sm text-text-dim leading-relaxed mb-3">
+                Esta página está pensada para proyectos y clientes. Mi experiencia, formación y disponibilidad laboral están separadas para no mezclar ambos objetivos.
+              </p>
+              <Link to="/cv" className="text-sm text-accent hover:underline">
+                Ver CV profesional →
+              </Link>
             </div>
-          </div>
+          </aside>
 
-          {/* Form */}
-          <div className="card-glass rounded-xl p-6">
+          <div className="card-glass rounded-2xl p-6 sm:p-8">
+            <div className="mb-6">
+              <p className="font-mono text-xs uppercase tracking-wider text-accent mb-2">Solicitud de proyecto</p>
+              <h2 className="font-display font-black text-2xl text-text">Datos para preparar la conversación</h2>
+            </div>
             <ContactForm />
           </div>
         </div>
