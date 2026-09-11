@@ -78,7 +78,13 @@ Se han añadido tres casos diseñados para demostrar criterio comercial sin inve
 
 Cada caso incluye una advertencia visible de que es conceptual y no presenta resultados, testimonios o métricas como si procedieran de un cliente real.
 
-## 5. Validación antes de merge
+## 5. Privacidad
+
+La política de privacidad se ha actualizado para reflejar los campos reales del formulario, el uso de Vercel como infraestructura, Resend para correo transaccional y Vercel Web Analytics para medición agregada. La política de cookies también se ha ajustado a la implementación actual.
+
+Antes de usar el sitio como canal comercial estable, conviene revisar periódicamente estos textos cuando cambien proveedores, finalidades o configuración del tratamiento.
+
+## 6. Validación antes de merge
 
 Ejecutar desde `mrabeh-portfolio/mrabeh-portfolio`:
 
@@ -98,7 +104,7 @@ Después comprobar en la preview de Vercel:
 6. aparición de tráfico en Vercel Web Analytics;
 7. rutas legales `/legal/privacidad` y `/legal/cookies`.
 
-## 6. Qué no hace esta versión
+## 7. Qué no hace esta versión
 
 - No afirma que los casos conceptuales sean clientes reales.
 - Web Security Review no se vende como pentest completo.
