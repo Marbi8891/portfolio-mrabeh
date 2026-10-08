@@ -52,3 +52,13 @@
 - Decisión: `mrabehfathi.com` es el dominio canónico. ADR-002 queda corregido por este ADR (no se elimina, se documenta como superseded). Se revierte `.es` → `.com` en los mismos archivos que ADR-002 había tocado (`README.md`, `index.html`, `Footer.tsx`, `Seo.tsx`, `AvisoLegal.tsx`, `NotFound.tsx`, `public/sitemap.xml`, `public/robots.txt`) y en la página nueva de CASE 01 (`OwaspWebAuditor.tsx`), que ya se había escrito con `.es` siguiendo el estado del repo en ese momento.
 - No se ha tocado `docs/portfolio-v2/AUDIT.md` (2026-09-07): es un registro histórico de lo que se decidió y por qué en ese momento, no una fuente activa que el código lea.
 - `VERIFY` pendiente del usuario: si controla `mrabehfathi.es` como dominio, considerar un 301 hacia `.com` para no perder tráfico de ningún enlace que ya se haya compartido con `.es` — fuera de alcance de este repo (config DNS/hosting).
+
+## ADR-008 — tor-osint como CASE 02 (case study)
+- Estado: DECIDIDO (2026-10-08)
+- Contexto: `tor-osint/` (en este mismo repositorio, MIT) llega a la v0.5.0 con CLI, interfaz web local, historial de cambios, watchlist, STIX 2.1/MISP y cadena de custodia. Se integra como segundo case study con la misma regla que CASE 01: EVIDENCE > CLAIMS.
+- Decisión: nueva entrada en `data/projects.ts` (justo después de OWASP Web Auditor, `featured: true`, `caseStudyPath`, `evidence`) y página `/proyectos/tor-osint` con el mismo patrón de dossier que `OwaspWebAuditor.tsx`. Ruta añadida a `App.tsx` y a `public/sitemap.xml`.
+- Estado mostrado: **"En desarrollo"**, no "Activo": la herramienta no se ha probado todavía contra la red Tor real ni se ha construido la imagen Docker del servicio Tor (el entorno de desarrollo bloqueaba esas conexiones). Se dice explícitamente en la sección "Limitations".
+- Encuadre ético visible en la página ("Lo que no hace, a propósito"): sin descubrimiento de servicios, sin seguir enlaces, sin interacción, sin consultas externas automáticas.
+- Capturas: generadas con la interfaz real sobre datos ficticios, en WebP (~56 KB en total), indicado en el pie de foto.
+- Detalle de cada cifra y afirmación: `docs/portfolio-v2/tor-osint-evidence.md`.
+- `VERIFY` pendiente del usuario: tras probar en Kali con Tor real, cambiar el estado a "Activo" y retirar la primera limitación.

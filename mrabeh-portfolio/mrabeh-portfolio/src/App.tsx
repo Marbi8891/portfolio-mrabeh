@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import Home from '@/pages/Home'
 import Projects from '@/pages/Projects'
 import OwaspWebAuditor from '@/pages/projects/OwaspWebAuditor'
+import TorOsint from '@/pages/projects/TorOsint'
 import CommercialCaseStudy from '@/pages/projects/CommercialCaseStudy'
 import About from '@/pages/About'
 import Services from '@/pages/Services'
@@ -25,6 +26,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/proyectos" element={<Projects />} />
             <Route path="/proyectos/owasp-web-auditor" element={<OwaspWebAuditor />} />
+            <Route path="/proyectos/tor-osint" element={<TorOsint />} />
             <Route path="/proyectos/concepto/:projectId" element={<CommercialCaseStudy />} />
             <Route path="/sobre-mi" element={<About />} />
             <Route path="/servicios" element={<Services />} />
