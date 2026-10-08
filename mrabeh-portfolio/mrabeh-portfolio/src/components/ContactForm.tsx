@@ -1,84 +1,130 @@
 import { useState } from 'react'
-import { Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { AlertCircle, LoaderCircle, Send } from 'lucide-react'
 
 interface FormData {
   name: string
   email: string
   company: string
-  reason: string
+  service: string
+  budget: string
+  timeline: string
   message: string
+  website: string
 }
 
-const reasons = [
-  'Oferta de trabajo',
-  'Colaboración técnica',
-  'Consultoría / diagnóstico',
-  'Proyecto freelance',
+const services = [
+  'Web profesional / landing page',
+  'Aplicación web / herramienta interna',
+  'Automatización de procesos',
+  'Web Security Review',
+  'Mantenimiento / mejora de una web existente',
   'Otro',
 ]
 
+const budgets = [
+  'Menos de 1.000 €',
+  '1.000–2.500 €',
+  '2.500–5.000 €',
+  'Más de 5.000 €',
+  'Aún no lo sé',
+]
+
+const timelines = [
+  'Lo antes posible',
+  'Durante este mes',
+  'En 1–3 meses',
+  'Más adelante',
+  'Solo estoy valorando opciones',
+]
+
+const initialFormData: FormData = {
+  name: '',
+  email: '',
+  company: '',
+  service: '',
+  budget: '',
+  timeline: '',
+  message: '',
+  website: '',
+}
+
 export default function ContactForm() {
-  const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    company: '',
-    reason: '',
-    message: '',
-  })
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [formData, setFormData] = useState<FormData>(initialFormData)
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+    setFormData((previous) => ({ ...previous, [event.target.name]: event.target.value }))
+    if (status === 'error') {
+      setStatus('idle')
+      setErrorMessage('')
+    }
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
 
-    if (!formData.name || !formData.email || !formData.reason || !formData.message) {
+    if (!formData.name || !formData.email || !formData.service || !formData.message) {
       setStatus('error')
+      setErrorMessage('Completa nombre, email, servicio y descripción del proyecto.')
       return
     }
 
-    // TODO: switch to a Formspree endpoint (or similar) once a real form ID exists.
-    // Until then, submitting opens the visitor's email client with the message
-    // pre-filled, so the form is always functional rather than silently failing.
-    const subject = encodeURIComponent(`[Portfolio] ${formData.reason} — ${formData.name}`)
-    const body = encodeURIComponent(
-      `Nombre: ${formData.name}\nEmail: ${formData.email}\nEmpresa: ${formData.company || '—'}\nMotivo: ${formData.reason}\n\n${formData.message}`
-    )
-    window.location.href = `mailto:mrabehfathiprofesional@gmail.com?subject=${subject}&body=${body}`
-    setStatus('success')
+    setStatus('submitting')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as { error?: string } | null
+        throw new Error(payload?.error || 'No se ha podido enviar la solicitud.')
+      }
+
+      window.location.assign('/gracias')
+    } catch (error) {
+      setStatus('error')
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : 'No se ha podido enviar la solicitud. Inténtalo de nuevo o escríbeme por email.'
+      )
+    }
   }
 
   const inputClass =
-    'w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text placeholder-text-muted focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 transition-all duration-200 font-mono'
+    'w-full bg-surface border border-border rounded-lg px-4 py-3 text-sm text-text placeholder-text-muted focus-visible:outline-none focus-visible:border-accent focus-visible:ring-2 focus-visible:ring-accent/40 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed'
   const labelClass = 'block text-xs font-mono text-text-muted mb-2 uppercase tracking-wider'
+  const submitting = status === 'submitting'
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit} noValidate>
+    <form className="space-y-5" onSubmit={handleSubmit} noValidate>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="cf-name" className={labelClass}>
-            Nombre *
-          </label>
+          <label htmlFor="cf-name" className={labelClass}>Nombre *</label>
           <input
             id="cf-name"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Tu nombre completo"
+            placeholder="Tu nombre"
             className={inputClass}
-            aria-required="true"
+            autoComplete="name"
+            disabled={submitting}
             required
           />
         </div>
         <div>
-          <label htmlFor="cf-email" className={labelClass}>
-            Email *
-          </label>
+          <label htmlFor="cf-email" className={labelClass}>Email *</label>
           <input
             id="cf-email"
             type="email"
@@ -87,98 +133,136 @@ export default function ContactForm() {
             onChange={handleChange}
             placeholder="tu@empresa.com"
             className={inputClass}
-            aria-required="true"
+            autoComplete="email"
+            disabled={submitting}
             required
           />
         </div>
       </div>
 
+      <div>
+        <label htmlFor="cf-company" className={labelClass}>Empresa / proyecto</label>
+        <input
+          id="cf-company"
+          type="text"
+          name="company"
+          value={formData.company}
+          onChange={handleChange}
+          placeholder="Nombre de la empresa o proyecto"
+          className={inputClass}
+          autoComplete="organization"
+          disabled={submitting}
+        />
+      </div>
+
+      <div>
+        <label htmlFor="cf-service" className={labelClass}>¿Qué necesitas? *</label>
+        <select
+          id="cf-service"
+          name="service"
+          value={formData.service}
+          onChange={handleChange}
+          className={inputClass}
+          disabled={submitting}
+          required
+        >
+          <option value="" disabled>Selecciona un servicio</option>
+          {services.map((service) => (
+            <option key={service} value={service}>{service}</option>
+          ))}
+        </select>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="cf-company" className={labelClass}>
-            Empresa
-          </label>
-          <input
-            id="cf-company"
-            type="text"
-            name="company"
-            value={formData.company}
+          <label htmlFor="cf-budget" className={labelClass}>Presupuesto orientativo</label>
+          <select
+            id="cf-budget"
+            name="budget"
+            value={formData.budget}
             onChange={handleChange}
-            placeholder="Nombre de la empresa"
             className={inputClass}
-          />
+            disabled={submitting}
+          >
+            <option value="">Selecciona una opción</option>
+            {budgets.map((budget) => (
+              <option key={budget} value={budget}>{budget}</option>
+            ))}
+          </select>
         </div>
         <div>
-          <label htmlFor="cf-reason" className={labelClass}>
-            Motivo *
-          </label>
+          <label htmlFor="cf-timeline" className={labelClass}>Plazo aproximado</label>
           <select
-            id="cf-reason"
-            name="reason"
-            value={formData.reason}
+            id="cf-timeline"
+            name="timeline"
+            value={formData.timeline}
             onChange={handleChange}
             className={inputClass}
-            aria-required="true"
-            required
+            disabled={submitting}
           >
-            <option value="" disabled>
-              Selecciona un motivo
-            </option>
-            {reasons.map((r) => (
-              <option key={r} value={r}>
-                {r}
-              </option>
+            <option value="">Selecciona una opción</option>
+            {timelines.map((timeline) => (
+              <option key={timeline} value={timeline}>{timeline}</option>
             ))}
           </select>
         </div>
       </div>
 
       <div>
-        <label htmlFor="cf-message" className={labelClass}>
-          Mensaje *
-        </label>
+        <label htmlFor="cf-message" className={labelClass}>Cuéntame el proyecto *</label>
         <textarea
           id="cf-message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Cuéntame en qué puedo ayudarte..."
-          rows={5}
+          placeholder="Qué quieres conseguir, qué tienes ahora y qué problema quieres resolver..."
+          rows={6}
           className={inputClass}
-          aria-required="true"
+          disabled={submitting}
           required
         />
       </div>
 
-      {/* Status messages */}
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="cf-website">No rellenar este campo</label>
+        <input
+          id="cf-website"
+          type="text"
+          name="website"
+          value={formData.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div aria-live="polite">
-        {status === 'success' && (
-          <div className="flex items-center gap-3 p-4 rounded-lg bg-accent-green/10 border border-accent-green/20 text-accent-green text-sm">
-            <CheckCircle size={16} />
-            Se ha abierto tu cliente de correo con el mensaje listo para enviar. Si no se abre, escríbeme directamente a mrabehfathiprofesional@gmail.com.
-          </div>
-        )}
         {status === 'error' && (
-          <div className="flex items-center gap-3 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
-            <AlertCircle size={16} />
-            Completa los campos obligatorios (*), o escríbeme directamente a mrabehfathiprofesional@gmail.com
+          <div className="flex items-start gap-3 p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+            <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
+            <div>
+              <p>{errorMessage}</p>
+              <a
+                href="mailto:mrabehfathiprofesional@gmail.com"
+                className="inline-block mt-1 text-accent hover:underline"
+              >
+                Escribir por email
+              </a>
+            </div>
           </div>
         )}
       </div>
 
-      <button type="submit" className="btn-primary w-full justify-center">
-        <Send size={16} />
-        Enviar mensaje
+      <button type="submit" className="btn-primary w-full justify-center" disabled={submitting}>
+        {submitting ? <LoaderCircle size={16} className="animate-spin" /> : <Send size={16} />}
+        {submitting ? 'Enviando solicitud…' : 'Solicitar propuesta'}
       </button>
 
-      <p className="text-xs text-text-muted text-center">
-        También puedes escribirme directamente a{' '}
-        <a
-          href="mailto:mrabehfathiprofesional@gmail.com"
-          className="text-accent hover:underline"
-        >
+      <p className="text-xs text-text-muted text-center leading-relaxed">
+        Tus datos se utilizan únicamente para responder a esta solicitud. También puedes escribir directamente a{' '}
+        <a href="mailto:mrabehfathiprofesional@gmail.com" className="text-accent hover:underline">
           mrabehfathiprofesional@gmail.com
-        </a>
+        </a>.
       </p>
     </form>
   )

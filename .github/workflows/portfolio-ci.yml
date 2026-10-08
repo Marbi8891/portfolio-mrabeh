@@ -1,0 +1,44 @@
+name: Portfolio CI
+
+on:
+  pull_request:
+    paths:
+      - 'mrabeh-portfolio/mrabeh-portfolio/**'
+      - '.github/workflows/portfolio-ci.yml'
+  push:
+    branches:
+      - main
+      - 'feat/**'
+    paths:
+      - 'mrabeh-portfolio/mrabeh-portfolio/**'
+      - '.github/workflows/portfolio-ci.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mrabeh-portfolio/mrabeh-portfolio
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: mrabeh-portfolio/mrabeh-portfolio/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build

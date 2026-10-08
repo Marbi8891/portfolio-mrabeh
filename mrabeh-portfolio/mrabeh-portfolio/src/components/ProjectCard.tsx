@@ -1,9 +1,27 @@
-import { ArrowUpRight, Github, ExternalLink, Shield, ShieldCheck, Terminal, BarChart3, Network, Brain, Lock, Calculator, type LucideProps } from 'lucide-react'
+import {
+  ArrowUpRight,
+  BarChart3,
+  Brain,
+  BriefcaseBusiness,
+  Calculator,
+  ExternalLink,
+  Github,
+  HardHat,
+  HeartPulse,
+  Lock,
+  Network,
+  Shield,
+  ShieldCheck,
+  Terminal,
+  type LucideProps,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { Project } from '@/data/projects'
+import type { CommercialCaseProject } from '@/data/commercialCases'
 import type { ForwardRefExoticComponent, RefAttributes } from 'react'
 
 type LucideIcon = ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>
+type PortfolioProject = Project | CommercialCaseProject
 
 const iconMap: Record<string, LucideIcon> = {
   Shield,
@@ -14,6 +32,9 @@ const iconMap: Record<string, LucideIcon> = {
   Brain,
   Lock,
   Calculator,
+  BriefcaseBusiness,
+  HeartPulse,
+  HardHat,
 }
 
 const statusLabel: Record<string, string> = {
@@ -29,12 +50,15 @@ const statusColor: Record<string, string> = {
 }
 
 interface ProjectCardProps {
-  project: Project
+  project: PortfolioProject
   featured?: boolean
 }
 
 export default function ProjectCard({ project, featured = false }: ProjectCardProps) {
   const Icon = iconMap[project.icon] || Shield
+  const isConcept = 'concept' in project && project.concept === true
+  const displayStatus = isConcept ? 'Conceptual' : statusLabel[project.status]
+  const displayStatusColor = isConcept ? '#f59e0b' : statusColor[project.status]
 
   return (
     <div
@@ -45,8 +69,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         borderColor: `${project.color}15`,
       }}
     >
-      {/* Featured / case-study badge */}
-      {(featured || project.caseStudyPath) && (
+      {(featured || project.caseStudyPath || isConcept) && (
         <div
           className="absolute top-4 right-4 text-xs font-mono px-2 py-0.5 rounded-full"
           style={{
@@ -55,11 +78,10 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             color: project.color,
           }}
         >
-          {project.caseStudyPath ? 'Caso 01' : 'Destacado'}
+          {isConcept ? 'Caso conceptual' : project.caseStudyPath ? 'Caso' : 'Destacado'}
         </div>
       )}
 
-      {/* Icon */}
       <div
         className="w-11 h-11 rounded-lg flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110"
         style={{
@@ -70,21 +92,25 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         <Icon size={22} className="transition-colors" style={{ color: project.color } as React.CSSProperties} />
       </div>
 
-      {/* Content */}
       <div className="mb-4">
-        <div className="flex items-center gap-2 mb-1">
+        <div className="flex items-center gap-2 mb-1 pr-20">
           <h3 className="font-display font-bold text-lg text-text">{project.title}</h3>
           <span
-            className="w-1.5 h-1.5 rounded-full"
-            style={{ backgroundColor: statusColor[project.status] }}
-            title={statusLabel[project.status]}
+            className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+            style={{ backgroundColor: displayStatusColor }}
+            title={displayStatus}
           />
         </div>
         <p className="text-sm text-text-dim mb-3">{project.subtitle}</p>
         <p className="text-sm text-text-muted leading-relaxed line-clamp-3">{project.description}</p>
       </div>
 
-      {/* Tags */}
+      {isConcept && (
+        <div className="mb-4 rounded-lg border border-amber-400/20 bg-amber-400/5 px-3 py-2 text-xs text-amber-200/80 leading-relaxed">
+          Ejercicio de propuesta comercial. No representa un trabajo realizado para un cliente real.
+        </div>
+      )}
+
       <div className="flex flex-wrap gap-1.5 mb-5">
         {project.tags.slice(0, 4).map((tag) => (
           <span key={tag} className="tag">
@@ -96,22 +122,19 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         )}
       </div>
 
-      {/* Evidence (verifiable facts, not adjectives) */}
       {project.evidence && project.evidence.length > 0 && (
         <div className="flex items-center gap-2 mb-5 font-mono text-xs text-text-dim">
-          <span className="uppercase tracking-widest text-text-muted">Evidence</span>
+          <span className="uppercase tracking-widest text-text-muted">
+            {isConcept ? 'Disclosure' : 'Evidence'}
+          </span>
           <span aria-hidden="true" className="text-border-bright">/</span>
           <span>{project.evidence.join(' · ')}</span>
         </div>
       )}
 
-      {/* Footer */}
       <div className="flex items-center justify-between pt-4 border-t border-border">
-        <span
-          className="text-xs font-mono"
-          style={{ color: statusColor[project.status] }}
-        >
-          ● {statusLabel[project.status]}
+        <span className="text-xs font-mono" style={{ color: displayStatusColor }}>
+          ● {displayStatus}
         </span>
         <div className="flex items-center gap-3">
           {project.links?.github && (
@@ -141,7 +164,9 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
             className="flex items-center gap-1 text-sm text-text-dim hover:text-accent transition-colors group/link"
             style={{ color: project.color }}
           >
-            <span className="text-xs font-mono">{project.caseStudyPath ? 'ver_caso' : 'ver_más'}</span>
+            <span className="text-xs font-mono">
+              {isConcept ? 'ver_concepto' : project.caseStudyPath ? 'ver_caso' : 'ver_más'}
+            </span>
             <ArrowUpRight size={14} className="transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
           </Link>
         </div>
