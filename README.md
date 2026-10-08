@@ -4,4 +4,4 @@ Personal portfolio website. Source lives in [`mrabeh-portfolio/mrabeh-portfolio`
 
 Lab/networking utilities used for authorized security labs live in [`lab-scripts/`](lab-scripts) — separated from the site source.
 
-[`tor-osint/`](tor-osint) is a small local OSINT research platform (Python CLI) for explicitly listed `.onion` sources via Tor: SQLite storage, IOC extraction, search, correlation, deduplication and HTML reports. See its [README](tor-osint/README.md).
+[tor-osint](https://github.com/Marbi8891/tor-osint) — a local OSINT research platform for explicitly listed `.onion` sources via Tor (IOCs, change tracking, correlation, STIX 2.1/MISP, chain of custody) — now lives in its own repository. Case study: [`/proyectos/tor-osint`](https://mrabehfathi.com/proyectos/tor-osint).

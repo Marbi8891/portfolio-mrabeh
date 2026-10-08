@@ -61,7 +61,7 @@ export const projects: Project[] = [
     icon: 'Network',
     color: '#00d4ff',
     links: {
-      github: 'https://github.com/Marbi8891/portfolio-mrabeh/tree/main/tor-osint',
+      github: 'https://github.com/Marbi8891/tor-osint',
     },
     caseStudyPath: '/proyectos/tor-osint',
     evidence: ['245 tests', '13 tipos de IOC', 'MIT · público'],

@@ -62,3 +62,11 @@
 - Capturas: generadas con la interfaz real sobre datos ficticios, en WebP (~56 KB en total), indicado en el pie de foto.
 - Detalle de cada cifra y afirmación: `docs/portfolio-v2/tor-osint-evidence.md`.
 - `VERIFY` pendiente del usuario: tras probar en Kali con Tor real, cambiar el estado a "Activo" y retirar la primera limitación.
+
+## ADR-009 — tor-osint pasa a su propio repositorio
+- Estado: DECIDIDO (2026-10-08), por petición explícita del usuario.
+- Contexto: tor-osint (CASE 02) vivía en `tor-osint/` dentro de este repo junto al portfolio, NEXARO y lab-scripts. Para presentarlo como proyecto independiente (README propio, CI con prueba contra Tor real, issues, releases) se extrae a `github.com/Marbi8891/tor-osint`.
+- Decisión: extracción con `git subtree split --prefix=tor-osint` (conserva los 9 commits de su historial) + un commit de puesta en marcha del repo. En este repo se elimina la carpeta y su workflow `tor-osint-ci.yml`; queda `tor-osint/README.md` apuntando al repo nuevo para no romper enlaces antiguos.
+- El CASE 02 (`TorOsint.tsx`), la tarjeta de `data/projects.ts` y `tor-osint-evidence.md` enlazan ahora al repo nuevo.
+- `VERIFY` pendiente: el repo nuevo lo crea el usuario (la integración de GitHub no tenía permiso para crearlo). No fusionar este cambio en `main` hasta que `Marbi8891/tor-osint` exista con el código subido, o los enlaces del CASE 02 darán 404.
+

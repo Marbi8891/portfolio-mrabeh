@@ -2,8 +2,8 @@ import { Github, FileText, ExternalLink, ArrowLeft, ArrowRight } from 'lucide-re
 import { Link } from 'react-router-dom'
 import Seo from '@/components/Seo'
 
-const REPO = 'https://github.com/Marbi8891/portfolio-mrabeh/tree/main/tor-osint'
-const BLOB = 'https://github.com/Marbi8891/portfolio-mrabeh/blob/main/tor-osint'
+const REPO = 'https://github.com/Marbi8891/tor-osint'
+const BLOB = 'https://github.com/Marbi8891/tor-osint/blob/main'
 const linkProps = { target: '_blank', rel: 'noopener noreferrer' } as const
 
 /** One numbered dossier section, same pattern as CASE 01. */
@@ -208,7 +208,7 @@ export default function TorOsint() {
             <dt className="text-text-muted text-xs uppercase tracking-widest mb-1">Repository</dt>
             <dd>
               <a href={REPO} {...linkProps} className="text-accent hover:text-accent-dim break-all">
-                portfolio-mrabeh/tor-osint
+                github.com/Marbi8891/tor-osint
               </a>
             </dd>
           </div>
@@ -318,8 +318,8 @@ export default function TorOsint() {
           <p>
             <span className="font-display font-black text-2xl text-text align-middle">245</span>{' '}
             <span className="text-text-dim">
-              tests con pytest y lint con ruff, ejecutados en Python 3.10 y 3.13; CI configurado en GitHub Actions
-              para 3.10, 3.12 y 3.13.
+              tests con pytest y lint con ruff, ejecutados en Python 3.10, 3.12 y 3.13; CI configurado en GitHub
+              Actions para 3.10–3.13 y una prueba con Docker contra la red Tor real.
             </span>
           </p>
           <p>
