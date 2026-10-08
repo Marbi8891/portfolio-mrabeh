@@ -70,3 +70,9 @@
 - El CASE 02 (`TorOsint.tsx`), la tarjeta de `data/projects.ts` y `tor-osint-evidence.md` enlazan ahora al repo nuevo.
 - `VERIFY` pendiente: el repo nuevo lo crea el usuario (la integración de GitHub no tenía permiso para crearlo). No fusionar este cambio en `main` hasta que `Marbi8891/tor-osint` exista con el código subido, o los enlaces del CASE 02 darán 404.
 
+## ADR-010 — CASE 02 pasa a "Activo" tras verificarse contra la red Tor real
+- Estado: DECIDIDO (2026-10-08). Resuelve el `VERIFY` de ADR-008 y ADR-009.
+- Evidencia: el repo `Marbi8891/tor-osint` existe, es público y tiene el código. Su CI (run 37734513252, commit `fd1459f`) pasa entero: tests en Python 3.10–3.13 y el job «Docker + Tor real» (bootstrap de Tor, `tor-check` IsTor=True, crawl de la onion oficial de The Tor Project, informe, STIX, `verify` y web solo en loopback).
+- La primera ejecución real destapó un fallo que los tests simulados no podían ver: timeout de 30 s insuficiente para la primera conexión a una onion. Se subió a 60 s y se cuenta en el case study como decisión técnica (Decision 05).
+- Cambios: estado "Activo · v0.5.0" en la página y `status: 'active'` en la tarjeta; la primera limitación pasa a describir el alcance real de la prueba; tabla de evidencias actualizada (filas 2, 5, 17, 18 y nueva 19).
+

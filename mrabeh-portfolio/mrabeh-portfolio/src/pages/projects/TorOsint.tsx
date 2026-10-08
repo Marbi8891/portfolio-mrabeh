@@ -102,7 +102,8 @@ const testCategories: { label: string; detail: string }[] = [
   { label: 'Conformidad STIX 2.1', detail: 'El bundle se valida con la librería oficial de OASIS (stix2) y sus patrones con stix2-patterns.' },
   { label: 'Seguridad web', detail: 'Servidor real en un puerto libre: loopback, Host, CSRF, Origin, CSP, lista blanca de estáticos.' },
   { label: 'Datos y migraciones', detail: 'Historial, FTS5 sincronizado por triggers y migración real desde una base de datos v2.' },
-  { label: 'Sin red', detail: 'Todo con HTTP simulado: ningún test necesita Tor ni acceso a internet.' },
+  { label: 'Sin red', detail: 'Los tests unitarios usan HTTP simulado: ninguno necesita Tor ni acceso a internet.' },
+  { label: 'Red Tor real (CI)', detail: 'Docker + Tor: tor-check, crawl de la onion oficial de The Tor Project, informe, STIX, verify y la web solo en loopback.' },
 ]
 
 const architectureSteps = [
@@ -131,6 +132,10 @@ const decisions: { title: string; body: string }[] = [
   {
     title: 'Alertas por versión de contenido',
     body: 'La clave única (vigilancia, página, hash) evita que un crawl periódico repita alertas de una página que no ha cambiado, sin perder las de una página que cambia y sigue coincidiendo.',
+  },
+  {
+    title: 'Timeout ajustado con la red real, no con tests',
+    body: 'La primera ejecución contra la red Tor real confirmó IsTor=True, pero el crawl de la onion de The Tor Project falló por timeout a los 30 s: la primera conexión a un servicio onion (descriptor + circuito de rendezvous) tarda más con un cliente recién arrancado. El valor por defecto pasó a 60 s. Ningún test con HTTP simulado podía detectarlo.',
   },
 ]
 
@@ -191,9 +196,9 @@ export default function TorOsint() {
         <dl className="grid grid-cols-2 sm:grid-cols-3 gap-5 card-glass rounded-xl p-5 mb-6 font-mono text-sm">
           <div>
             <dt className="text-text-muted text-xs uppercase tracking-widest mb-1">Status</dt>
-            <dd className="text-text-dim flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
-              En desarrollo · v0.5.0
+            <dd className="text-accent-green flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-green" aria-hidden="true" />
+              Activo · v0.5.0
             </dd>
           </div>
           <div>
@@ -318,8 +323,8 @@ export default function TorOsint() {
           <p>
             <span className="font-display font-black text-2xl text-text align-middle">245</span>{' '}
             <span className="text-text-dim">
-              tests con pytest y lint con ruff, ejecutados en Python 3.10, 3.12 y 3.13; CI configurado en GitHub
-              Actions para 3.10–3.13 y una prueba con Docker contra la red Tor real.
+              tests con pytest y lint con ruff, en GitHub Actions con Python 3.10, 3.11, 3.12 y 3.13. El mismo CI
+              levanta Tor con Docker y hace una prueba de extremo a extremo contra la red Tor real.
             </span>
           </p>
           <p>
@@ -374,8 +379,8 @@ export default function TorOsint() {
         <DossierSection number="09" label="Limitations">
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              Verificado con tests y con Tor simulado. Las pruebas contra la red Tor real y la imagen Docker del
-              servicio Tor están pendientes: el entorno de desarrollo bloqueaba esas conexiones.
+              La prueba contra la red Tor real usa un único objetivo legítimo (la onion oficial de The Tor Project); el
+              tiempo de respuesta de otras fuentes depende del estado de la red Tor.
             </li>
             <li>La extracción de IOCs y la redacción de secretos son heurísticas: reducen errores, no los eliminan.</li>
             <li>Sin JavaScript: las páginas que generan su contenido en el cliente aparecen vacías.</li>
