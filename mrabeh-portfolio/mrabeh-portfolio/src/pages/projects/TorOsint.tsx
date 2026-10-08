@@ -104,6 +104,7 @@ const testCategories: { label: string; detail: string }[] = [
   { label: 'Datos y migraciones', detail: 'Historial, FTS5 sincronizado por triggers y migración real desde una base de datos v2.' },
   { label: 'Sin red', detail: 'Los tests unitarios usan HTTP simulado: ninguno necesita Tor ni acceso a internet.' },
   { label: 'Red Tor real (CI)', detail: 'Docker + Tor: tor-check, crawl de la onion oficial de The Tor Project, informe, STIX, verify y la web solo en loopback.' },
+  { label: 'Kali Linux real', detail: 'Flujo completo a mano en Kali rolling (Python 3.14): tor-check, crawl, IOCs, alertas, informe, web, STIX, y verify detectando un informe modificado.' },
 ]
 
 const architectureSteps = [
@@ -323,7 +324,7 @@ export default function TorOsint() {
           <p>
             <span className="font-display font-black text-2xl text-text align-middle">245</span>{' '}
             <span className="text-text-dim">
-              tests con pytest y lint con ruff, en GitHub Actions con Python 3.10, 3.11, 3.12 y 3.13. El mismo CI
+              tests con pytest y lint con ruff, en GitHub Actions con Python 3.10 a 3.14. El mismo CI
               levanta Tor con Docker y hace una prueba de extremo a extremo contra la red Tor real.
             </span>
           </p>

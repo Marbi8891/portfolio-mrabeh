@@ -9,8 +9,8 @@ la afirmación se comprobó ejecutando o leyendo el código, no de memoria.
 
 | # | CLAIM | EVIDENCE | SOURCE | SAFE TO DISPLAY |
 |---|---|---|---|---|
-| 1 | 245 tests | `pytest` completo | Salida "245 passed" con Python 3.10, 3.12 y 3.13 (entornos `uv`), 2026-10-08 | YES |
-| 2 | CI en Python 3.10–3.13 y prueba de extremo a extremo con Docker contra la red Tor real | Run de GitHub Actions en verde: 4 jobs de tests + job «Docker + Tor real» (build de imágenes, bootstrap de Tor al 100 %, `tor-check` IsTor=True, crawl de la onion oficial de The Tor Project, informe, STIX, `verify`, web solo en loopback) | `Marbi8891/tor-osint`, run 37734513252 (commit `fd1459f`), 2026-10-08 | YES |
+| 1 | 245 tests | `pytest` completo | Salida "245 passed" con Python 3.10, 3.12, 3.13 y 3.14 (entornos `uv`), 2026-10-08 | YES |
+| 2 | CI en Python 3.10–3.14 y prueba de extremo a extremo con Docker contra la red Tor real | Run de GitHub Actions en verde: 4 jobs de tests + job «Docker + Tor real» (build de imágenes, bootstrap de Tor al 100 %, `tor-check` IsTor=True, crawl de la onion oficial de The Tor Project, informe, STIX, `verify`, web solo en loopback) | `Marbi8891/tor-osint`, run 37734513252 (commit `fd1459f`) para Tor real; jobs de tests 3.10–3.14 en verde en el run 37825119091 (commit `b93c155`), 2026-10-08 | YES |
 | 3 | 13 tipos de IOC | Tupla `IOC_TYPES` | `src/tor_osint/ioc.py` (contada: email, domain, url, ipv4, md5, sha1, sha256, cve, onion, btc, eth, attack, pgp) | YES |
 | 4 | 2 dependencias de ejecución | `dependencies` | `pyproject.toml`: `requests[socks]`, `beautifulsoup4` | YES |
 | 5 | Licencia MIT, repositorio público | `LICENSE` + visibilidad | `LICENSE`; repo `Marbi8891/tor-osint` público con el código subido (consultado vía API de GitHub, 2026-10-08) | YES |
@@ -28,3 +28,4 @@ la afirmación se comprobó ejecutando o leyendo el código, no de memoria.
 | 17 | Verificado contra la red Tor real | Ver fila 2. Antes de eso solo había tests con HTTP simulado (el entorno de desarrollo bloqueaba Tor y `deb.debian.org`) | Run 37734513252 | YES |
 | 18 | Estado "Activo" | La verificación de la fila 17 era la condición puesta en ADR-008; ver ADR-010 | `docs/portfolio-v2/DECISIONS.md` | YES |
 | 19 | Timeout por defecto subido de 30 a 60 s por un fallo real | Primer run contra Tor real: `IsTor: True` pero `ConnectTimeout` a los 30 s en la primera conexión a la onion; con 60/120 s el crawl pasa | Runs 37734288098 (fallo) y 37734513252 (verde); commit `fd1459f` | YES |
+| 20 | Probado a mano en Kali Linux real | Instalación con `venv` en Kali rolling (Python 3.14, `tor` 0.4.9.12); `tor-check` IsTor=True; crawl de la onion de The Tor Project (1 guardada, 0 fallidas, 30 IOCs onion); watchlist con alerta única y `--ack`; informe; web; STIX; `verify` marcando `[MODIFICADO]` un informe alterado y volviendo a OK tras regenerarlo; `audit` con 7 entradas | Salida de terminal del autor en su máquina, 2026-10-08; notas en `docs/MANUAL.md` §3 (commit `b93c155`) | YES |
