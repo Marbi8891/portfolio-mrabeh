@@ -1,3 +1,5 @@
+> **Sustituido (2026-10-14).** Este paquete describe una versión anterior de NEXARO (inteligencia de vulnerabilidades con Redis y un modelo de riesgo ponderado). El producto se ha redefinido como plataforma de gestión de riesgos para consultoras y MSP, con un diseño nuevo aprobado que vive en un repositorio propio. Este contenido se conserva solo como referencia histórica; no describe el producto actual ni debe usarse para implementar.
+
 # NEXARO — V1 Design Package
 
 *Affordable Vulnerability Intelligence, Risk Decision & Remediation. Architecture-First · Modular Monolith · 1 → 1,000 Users · Millions of Findings.*
